@@ -16,18 +16,22 @@ const Login = () => {
             className="p-3 rounded bg-slate-200 focus:outline focus:outline-primary"
             type="email"
             placeholder="Enter your email"
-            name="username"
-            id="username"
+            name="email"
+            id="email"
           />
           <input
-            className="p-3 rounded bg-slate-200 focus:outline focus:outline-primary"
+            className="p-3 rounded bg-slate-200 focus:outline focus:outline-primary "
             type="password"
             placeholder="Enter your password"
             name="password"
             id="password"
           />
           <p className="text-primary">Forgot password?</p>
-          <input className="btn btn-primary" type="submit" value="Login" />
+          <input
+            className="btn btn-primary text-secondary"
+            type="submit"
+            value="Login"
+          />
           <p>
             Don't have an account?{" "}
             <span className="text-primary font-semibold">
