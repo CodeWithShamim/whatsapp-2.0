@@ -2,16 +2,19 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-    apiKey: process.env.API_KEY,
-    authDomain: process.env.AUTH_DOMAIN,
-    projectId: process.env.PROJECT_ID,
-    storageBucket: process.env.STORAGE_BUCKET,
-    messagingSenderId: process.env.MESSAGING_SENDER_ID,
-    appId: process.env.APP_ID
+    // apiKey: process.env.API_KEY,
+    // authDomain: process.env.AUTH_DOMAIN,
+    // projectId: process.env.PROJECT_ID,
+    // storageBucket: process.env.STORAGE_BUCKET,
+    // messagingSenderId: process.env.MESSAGING_SENDER_ID,
+    // appId: process.env.APP_ID
+    apiKey: "AIzaSyBienguhI0MO8DDuSOmxmPXX-xvvcgua2k",
+    authDomain: "whatsapp-clone-9afc0.firebaseapp.com",
+    projectId: "whatsapp-clone-9afc0",
+    storageBucket: "whatsapp-clone-9afc0.appspot.com",
+    messagingSenderId: "582291207447",
+    appId: "1:582291207447:web:46fbadec8774a009127352"
 };
-
-console.log(process.env.API_KEY)
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-
 export default auth;
