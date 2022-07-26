@@ -8,7 +8,7 @@ const Home = () => {
   const [user] = useAuthState(auth);
 
   return (
-    <div className="p-4 md:p-6 lg:p-8">
+    <div className="p-2">
       {/* -----header------- */}
       <div className="flex justify-between items-center gap-3">
         <h2 className="text-3xl">Messages</h2>
