@@ -2,14 +2,19 @@ import { BsGoogle, BsFacebook } from 'react-icons/bs';
 import auth from '../firebase.init';
 import { useSignInWithGoogle, useSignInWithFacebook } from 'react-firebase-hooks/auth';
 import SocialLoading from './SocialLoading';
+import { useRouter } from 'next/router';
 
 const SocialLogin = () => {
 	const [ signInWithGoogle, user, loading, error ] = useSignInWithGoogle(auth);
 	const [ signInWithFacebook, user1, loading1, error1 ] = useSignInWithFacebook(auth);
+	const router = useRouter();
+
 	if (loading || loading1) {
 		return <SocialLoading />;
 	}
+
 	if (user || user1) {
+		router.push('/');
 	}
 
 	return (
