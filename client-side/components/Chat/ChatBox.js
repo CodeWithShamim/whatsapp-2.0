@@ -3,7 +3,7 @@ import { RiAttachment2 } from "react-icons/ri";
 
 const ChatBox = () => {
   return (
-    <div className=" absolute bottom-3 left-2 right-2">
+    <div className="">
       <textarea
         className="w-full border focus:border-0 rounded-xl p-2 outline-secondary focus:outline focus:outline-accent"
         placeholder="Message"

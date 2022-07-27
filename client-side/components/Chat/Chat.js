@@ -13,7 +13,7 @@ const Chat = () => {
       <div className="bg-secondary p-2 m-2 rounded-3xl shadow-lg flex justify-between items-center">
         <div className="flex justify-between items-center gap-3">
           <img
-            className="w-16 h-16 rounded-full"
+            className="w-10 h-10 rounded-full"
             src={user?.photoURL}
             alt="profileImg"
           />
