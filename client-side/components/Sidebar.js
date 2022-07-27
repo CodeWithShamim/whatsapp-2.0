@@ -14,7 +14,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div>
+    <div className="h-screen">
       <div className="flex items-center relative p-3">
         <p className="absolute text-2xl p-2">
           <AiOutlineSearch />

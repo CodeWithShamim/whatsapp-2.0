@@ -9,7 +9,7 @@ const Header = () => {
     <>
       {/* -----header------- */}
       <div className="flex justify-between items-center gap-3 m-2">
-        <h2 className="text-2xl">Messages</h2>
+        <h2 className="text-2xl text-accent font-semibold">Whatspp 2.0</h2>
 
         <div className="flex items-center justify-center">
           <div className="avatar online">

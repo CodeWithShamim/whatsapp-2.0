@@ -12,7 +12,7 @@ const Chat = () => {
   console.log(photoURL);
 
   return (
-    <div>
+    <div className="relative h-screen">
       {/* ---Header start--- */}
       <div className="bg-secondary p-2 m-2 rounded-3xl shadow-lg flex justify-between items-center">
         <div className="flex justify-between items-center gap-3">
@@ -43,7 +43,7 @@ const Chat = () => {
       {/* ---Header end--- */}
 
       {/* ------chatbox---- */}
-      <div>
+      <div className="absolute bottom-20 left-0 right-0">
         <ChatBox />
       </div>
     </div>
