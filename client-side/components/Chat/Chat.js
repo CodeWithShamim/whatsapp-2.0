@@ -2,10 +2,14 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { AiOutlineMore } from "react-icons/ai";
 import ChatBox from "./ChatBox";
+import SocialLoading from "../SocialLoading";
 
 const Chat = () => {
   const [user, isLoading] = useAuthState(auth);
+  const { photoURL, displayName } = user;
   const isOnline = window.navigator.onLine;
+
+  console.log(photoURL);
 
   return (
     <div>
@@ -14,11 +18,11 @@ const Chat = () => {
         <div className="flex justify-between items-center gap-3">
           <img
             className="w-10 h-10 rounded-full"
-            src={user?.photoURL}
-            alt="profileImg"
+            src={photoURL}
+            alt="profile"
           />
           <div>
-            <h2>{user?.displayName}</h2>
+            <h2>{displayName}</h2>
             <p>
               {isOnline ? (
                 <span>

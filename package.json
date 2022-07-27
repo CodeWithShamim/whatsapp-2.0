@@ -1,23 +1,26 @@
 {
-  "name": "whatsapp-2.0",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/CodeWithShamim/whatsapp-2.0.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/CodeWithShamim/whatsapp-2.0/issues"
-  },
-  "homepage": "https://github.com/CodeWithShamim/whatsapp-2.0#readme",
-  "dependencies": {
-    "concurrently": "^7.3.0"
-  }
+    "name": "whatsapp-2.0",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "client": "npm run dev --prefix client-side",
+        "server": "nodemon server-side/server.js",
+        "dev": "concurrently \" npm run client \" \" npm run server\"",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/CodeWithShamim/whatsapp-2.0.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/CodeWithShamim/whatsapp-2.0/issues"
+    },
+    "homepage": "https://github.com/CodeWithShamim/whatsapp-2.0#readme",
+    "dependencies": {
+        "concurrently": "^7.3.0"
+    }
 }
