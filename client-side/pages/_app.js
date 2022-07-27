@@ -3,6 +3,7 @@ import Loading from '../components/Loading';
 import auth from '../firebase.init'
 import '../styles/globals.css'
 import Login from './login';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function MyApp({ Component, pageProps }) {
     const [user, isLoading] = useAuthState(auth);

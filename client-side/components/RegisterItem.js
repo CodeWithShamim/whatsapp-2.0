@@ -2,8 +2,18 @@ import { FaRocketchat } from "react-icons/fa";
 import Link from "next/link";
 import SocialLogin from "../components/SocialLogin";
 import { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import {
+  useCreateUserWithEmailAndPassword,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
+import auth from "../firebase.init";
+import { useRouter } from "next/router";
 
 const RegisterItem = () => {
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+  const [updateProfile, updating, error1] = useUpdateProfile(auth);
   const [info, setInfo] = useState({
     username: "",
     email: "",
@@ -11,17 +21,67 @@ const RegisterItem = () => {
     confirmPassword: "",
     image: "",
   });
+  const [loadImage, setLoadImage] = useState("");
+  const router = useRouter();
 
+  // -----------handle input--------------
   const handleInput = (e) => {
     setInfo({ ...info, [e.target.name]: e.target.value });
   };
 
-  const handleRegister = (e) => {
-    e.preventDefault();
-    console.log(info);
+  // ------------handle image file------------
+  const handleFile = (e) => {
+    if (e.target.files.length !== 0) {
+      setInfo({ ...info, [e.target.name]: e.target.files[0] });
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      setLoadImage(reader.result);
+    };
+    reader.readAsDataURL(e.target.files[0]);
   };
 
-  console.log(info);
+  // --------register-----------
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    const {
+      username: displayName,
+      email,
+      password,
+      confirmPassword,
+      image: photoURL,
+    } = info;
+
+    // confirm register
+    if (password !== confirmPassword) {
+      await createUserWithEmailAndPassword(email, password);
+      await updateProfile({
+        displayName,
+        photoURL: "https://simgbb.com/avatar/C3q38gybWmhx.png",
+      });
+    } else {
+      toast.error("Password matching should be same", {
+        position: "bottom-right",
+        autoClose: 8000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    }
+  };
+
+  if (user) {
+    router.push("/");
+    toast.success("Profile update success", {
+      position: "bottom-right",
+      autoClose: 8000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
+  }
 
   return (
     <div className="h-screen flex justify-center items-center m-6">
@@ -71,14 +131,23 @@ const RegisterItem = () => {
               type="file"
               name="image"
               id="image"
-              onChange={handleInput}
+              onChange={handleFile}
             />
+            {loadImage && (
+              <img className="w-16 h-16 rounded-full" src={loadImage} alt="" />
+            )}
 
-            <input
-              className="btn btn-primary text-secondary"
-              type="submit"
-              value="Register"
-            />
+            {loading ? (
+              <div className="btn loading bg-primary border-0"></div>
+            ) : (
+              <input
+                className="btn btn-primary text-secondary"
+                type="submit"
+                value="Register"
+              />
+            )}
+            {error && <p className="text-primary">Warning! {error.code}</p>}
+            {error1 && <p className="text-primary">Warning! {error1.code}</p>}
             <p>
               Already have an account?{" "}
               <span className="text-primary font-semibold">
@@ -91,6 +160,7 @@ const RegisterItem = () => {
           <SocialLogin />
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
