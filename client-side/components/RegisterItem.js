@@ -9,6 +9,8 @@ import {
 } from "react-firebase-hooks/auth";
 import auth from "../firebase.init";
 import { useRouter } from "next/router";
+import axios from "axios";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const RegisterItem = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
@@ -22,6 +24,7 @@ const RegisterItem = () => {
     image: "",
   });
   const [loadImage, setLoadImage] = useState("");
+  const [uploadLoading, setUploadLoading] = useState(false);
   const router = useRouter();
 
   // -----------handle input--------------
@@ -33,12 +36,12 @@ const RegisterItem = () => {
   const handleFile = (e) => {
     if (e.target.files.length !== 0) {
       setInfo({ ...info, [e.target.name]: e.target.files[0] });
+      const reader = new FileReader();
+      reader.onload = () => {
+        setLoadImage(reader.result);
+      };
+      reader.readAsDataURL(e.target.files[0]);
     }
-    const reader = new FileReader();
-    reader.onload = () => {
-      setLoadImage(reader.result);
-    };
-    reader.readAsDataURL(e.target.files[0]);
   };
 
   // --------register-----------
@@ -49,16 +52,36 @@ const RegisterItem = () => {
       email,
       password,
       confirmPassword,
-      image: photoURL,
+      image,
     } = info;
 
     // confirm register
-    if (password !== confirmPassword) {
-      await createUserWithEmailAndPassword(email, password);
-      await updateProfile({
-        displayName,
-        photoURL: "https://simgbb.com/avatar/C3q38gybWmhx.png",
-      });
+    if (password === confirmPassword) {
+      // upload image in imgbb
+      const uploadImage = async (img) => {
+        setUploadLoading(true);
+        const apiKey = "2db9baf808994bd3a320a217ed6a6c0a";
+        const fromData = new FormData();
+        fromData.append("image", img);
+        try {
+          const res = await axios.post(
+            `https://api.imgbb.com/1/upload?key=${apiKey}`,
+            fromData
+          );
+          const photoURL = res?.data?.data?.image?.url;
+          if (photoURL) {
+            await createUserWithEmailAndPassword(email, password);
+            await updateProfile({
+              displayName,
+              photoURL,
+            });
+            setUploadLoading(false);
+          }
+        } catch (error) {
+          setUploadLoading(false);
+        }
+      };
+      uploadImage(image);
     } else {
       toast.error("Password matching should be same", {
         position: "bottom-right",
@@ -136,8 +159,9 @@ const RegisterItem = () => {
             {loadImage && (
               <img className="w-16 h-16 rounded-full" src={loadImage} alt="" />
             )}
+            {/* {uploadLoading && <ClipLoader color="red" />} */}
 
-            {loading ? (
+            {loading || uploadLoading ? (
               <div className="btn loading bg-primary border-0"></div>
             ) : (
               <input

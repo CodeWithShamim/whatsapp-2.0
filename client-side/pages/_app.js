@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function MyApp({ Component, pageProps }) {
     const [user, isLoading] = useAuthState(auth);
+    console.log(user)
 
     if (isLoading) {
         return <Loading / >

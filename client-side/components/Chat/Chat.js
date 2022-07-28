@@ -5,11 +5,9 @@ import ChatBox from "./ChatBox";
 import SocialLoading from "../SocialLoading";
 
 const Chat = () => {
-  const [user, isLoading] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const { photoURL, displayName } = user;
   const isOnline = window.navigator.onLine;
-
-  console.log(photoURL);
 
   return (
     <div className="relative h-screen">
