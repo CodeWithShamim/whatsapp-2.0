@@ -3,6 +3,8 @@ import { BiUser } from "react-icons/bi";
 import { AiOutlineUsergroupAdd, AiOutlineSetting } from "react-icons/ai";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import ActiveFriends from "./ActiveFriends.js/ActiveFriends";
+import Friends from "./Friends/Friends";
 
 const Sidebar = () => {
   const [active, setActive] = useState(1);
@@ -14,14 +16,14 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="h-screen">
+    <div className="h-screen w-full overflow-hidden">
       <div className="flex items-center relative p-3">
-        <p className="absolute text-2xl p-2">
+        <p className="absolute text-lg p-2">
           <AiOutlineSearch />
         </p>
         <input
           type="email"
-          className="bg-base-200 rounded p-3 w-full text-center outline-secondary focus:outline-accent"
+          className="bg-base-200 rounded p-3 w-full text-center text-xs outline-secondary focus:outline-accent"
           id="email"
           name="email"
           placeholder="Search people or Messages"
@@ -36,7 +38,7 @@ const Sidebar = () => {
             className={
               active === n.id
                 ? "text-2xl p-2 rounded text-secondary bg-primary"
-                : "text-2xl p-2 rounded"
+                : "text-2xl p-2 rounded cursor-pointer"
             }
             onClick={() => setActive(n.id)}
           >
@@ -44,6 +46,12 @@ const Sidebar = () => {
           </p>
         ))}
       </div>
+
+      {/* -----------------active friends-------------------- */}
+      <ActiveFriends></ActiveFriends>
+
+      {/* ---------Friends------------- */}
+      <Friends></Friends>
     </div>
   );
 };

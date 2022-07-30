@@ -8,8 +8,13 @@ const Header = () => {
   return (
     <>
       {/* -----header------- */}
-      <div className="flex justify-between items-center gap-3 m-2">
-        <h2 className="text-2xl text-accent font-semibold">Whatspp 2.0</h2>
+      <div className="h-full flex justify-between items-center gap-3 m-2 font-serif">
+        <h2 className="relative text-2xl text-accent font-semibold">
+          Whatspp 2.0
+          <span className="absolute text-sm text-primary font-extrabold">
+            Beta
+          </span>
+        </h2>
 
         <div className="flex items-center justify-center">
           <div className="avatar online">

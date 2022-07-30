@@ -1,22 +1,22 @@
 import Chat from "../components/Chat/Chat";
 import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/Sidebar/Sidebar";
 
 const Home = () => {
   return (
     <>
       {/* ---------header----------- */}
-      <Header />
+      {/* <Header /> */}
 
-      <div className="flex flex-col lg:flex-row px-6">
+      <div className="h-screen flex flex-col lg:flex-row px-2 md:px-4 lg:px-6 font-serif text-xs">
         {/* -------------sidebar--------------- */}
-        <div className="basis-1/4 shadow-2xl rounded-xl">
+        <div className="lg:w-1/4 shadow-2xl rounded-xl pb-6">
           <Sidebar />
         </div>
 
         {/* ------chat------ */}
 
-        <div className="p-2 basis-1/2">
+        <div className="lg:w-full">
           <Chat />
         </div>
       </div>
