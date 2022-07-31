@@ -15,7 +15,11 @@ const Attachments = () => {
       {/* --------set attachments image--------- */}
       <div className="grid grid-cols-3 gap-3">
         {attachments?.map((img) => (
-          <img className="w-20 h-24" src={img} alt="attachment_image" />
+          <img
+            className="w-20 h-24 rounded"
+            src="/1.png"
+            alt="attachment_image"
+          />
         ))}
       </div>
     </div>

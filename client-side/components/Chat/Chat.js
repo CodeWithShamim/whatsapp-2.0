@@ -1,18 +1,21 @@
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
-import { AiOutlineMore } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineMore } from "react-icons/ai";
 import ChatBox from "./ChatBox";
 import SocialLoading from "../SocialLoading";
 import ChatFriendInfo from "./ChatFriendInfo/ChatFriendInfo";
 import Messages from "./Messages/Messages";
+import { useState } from "react";
+import { BiChevronRight } from "react-icons/bi";
 
 const Chat = () => {
   const [user, loading] = useAuthState(auth);
   const { photoURL, displayName } = user;
   const isOnline = window.navigator.onLine;
+  const [close, setClose] = useState(false);
 
   return (
-    <div className="h-screen flex flex-col lg:flex-row mt-4 lg:mt-0">
+    <div className="h-screen w-full flex flex-col lg:flex-row mt-4 lg:mt-0">
       <div className="w-full h-full flex flex-col justify-between">
         {/* ---Header start--- */}
         <div className="bg-secondary p-2 m-2 rounded-3xl shadow-lg flex justify-between items-center">
@@ -51,8 +54,28 @@ const Chat = () => {
         <ChatBox />
       </div>
 
+      {/* -------------toggle chat friend info--------------- */}
+      <div onClick={() => setClose(!close)} className="mt-6 cursor-pointer">
+        {/* ---------close friend info btn---------- */}
+        {!close && (
+          <div
+            onClick={() => setClose(!close)}
+            className="absolute hidden lg:block right-6 top-14 z-50 text-base cursor-pointer p-3"
+          >
+            <AiOutlineClose />
+          </div>
+        )}
+
+        {/* -----------------show chat friend info-------------- */}
+        {close && (
+          <div className="text-2xl">
+            <BiChevronRight />
+          </div>
+        )}
+      </div>
+
       {/* -------------ChatFriendInfo------------ */}
-      <div className="lg:w-1/2">
+      <div id="friendInfo" className={`lg:w-1/2 ${close && "lg:hidden"}`}>
         <ChatFriendInfo></ChatFriendInfo>
       </div>
     </div>

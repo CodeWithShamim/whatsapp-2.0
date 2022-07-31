@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <>
       {/* ---------header----------- */}
-      {/* <Header /> */}
+      <Header />
 
       <div className="h-screen flex flex-col lg:flex-row px-2 md:px-4 lg:px-6 font-serif text-xs">
         {/* -------------sidebar--------------- */}

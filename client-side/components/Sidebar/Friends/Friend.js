@@ -6,7 +6,7 @@ const Friend = ({ friend, select }) => {
         select === _id && "bg-primary text-secondary"
       }`}
     >
-      <img className="w-10 h-10" src={image} alt={name} />
+      <img className="w-16 h-16 rounded-full" src="/1.png" alt={name} />
       <div className="flex flex-col items-start justify-center pl-8">
         <h2 className="font-semibold">{name}</h2>
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing</p>

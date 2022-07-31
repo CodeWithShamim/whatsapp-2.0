@@ -4,7 +4,7 @@ import HeaderInfo from "./HeaderInfo";
 
 const ChatFriendInfo = () => {
   return (
-    <div className="text-center h-screen overflow-y-auto rounded-2xl shadow-2xl">
+    <div className="relative text-center h-screen overflow-y-auto rounded-2xl shadow-2xl">
       {/* _______header info________ */}
       <HeaderInfo></HeaderInfo>
       {/* _______contact info________ */}
