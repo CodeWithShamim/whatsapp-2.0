@@ -1,12 +1,11 @@
 import { AiOutlineMail, AiFillPhone, AiOutlineUser } from "react-icons/ai";
 
-const ContactInfo = () => {
-  const contactInfos = {
-    email: "shamimislamonline@gmail.com",
-    phone: "+880170000000",
-    username: "shamim_islam235",
+const ContactInfo = ({ userInfo }) => {
+  const { id, email, username } = userInfo;
+
+  const defaultValue = {
+    phone: "(+88)01762812568",
   };
-  const { email, phone, username } = contactInfos;
 
   return (
     <div className="mx-6 md:mx-10 lg:mx-16 my-6 md:my-8 lg:my-10">
@@ -32,7 +31,7 @@ const ContactInfo = () => {
           <span className="bg-slate-200 rounded-full p-2 text-secondary">
             <AiFillPhone />
           </span>
-          <p>{phone}</p>
+          <p>{defaultValue.phone}</p>
         </div>
         {/* ---username--- */}
         <div className="flex font-medium items-center gap-3">

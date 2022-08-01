@@ -1,5 +1,3 @@
-import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "../../firebase.init";
 import { AiOutlineClose, AiOutlineMore } from "react-icons/ai";
 import ChatBox from "./ChatBox";
 import ChatFriendInfo from "./ChatFriendInfo/ChatFriendInfo";
@@ -9,13 +7,11 @@ import { BiChevronRight } from "react-icons/bi";
 import { useSelector } from "react-redux";
 
 const Chat = () => {
-  const [user, loading] = useAuthState(auth);
-  const { photoURL, displayName } = user;
   const isOnline = window.navigator.onLine;
   const [close, setClose] = useState(false);
 
   const userInfo = useSelector((state) => state.user.userInfo);
-  console.log(userInfo);
+  const { id, username, email, photo } = userInfo;
 
   return (
     <div className="h-screen w-full flex flex-col lg:flex-row mt-4 lg:mt-0">
@@ -23,14 +19,10 @@ const Chat = () => {
         {/* ---Header start--- */}
         <div className="bg-secondary p-2 m-2 rounded-3xl shadow-lg flex justify-between items-center">
           <div className="flex justify-between items-center lg:gap-3">
-            <img
-              className="w-10 h-10 rounded-full"
-              src={photoURL}
-              alt="profile"
-            />
+            <img className="w-10 h-10 rounded-full" src={photo} alt="profile" />
 
             <div>
-              <h2>{displayName}</h2>
+              <h2>{username}</h2>
               <p>
                 {isOnline ? (
                   <span>

@@ -16,6 +16,7 @@ const Friends = () => {
         const getfriendLists = data.result.reverse();
         setFriends(getfriendLists);
         setSelect(getfriendLists[0]._id);
+        dispatch(addUserInfo(getfriendLists[0]));
       } catch (error) {
         console.log(error);
       }
