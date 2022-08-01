@@ -1,7 +1,6 @@
 const Friend = ({ friend, select }) => {
   const { _id, username, photo } = friend;
 
-  console.log(_id, select);
   return (
     <div
       className={`flex gap-4 justify-start items-center px-2 py-4 rounded border border-b-0 cursor-pointer ${

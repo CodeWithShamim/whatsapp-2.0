@@ -1,10 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Friend from "./Friend";
+import { useDispatch } from "react-redux";
+import { addUserInfo } from "../../../features/user/userSlice";
 
 const Friends = () => {
   const [friends, setFriends] = useState([]);
   const [select, setSelect] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getFriends = async () => {
@@ -20,10 +23,17 @@ const Friends = () => {
     getFriends();
   }, []);
 
+  const handleFriend = ({ _id: id, username, email, photo }) => {
+    setSelect(id);
+    // ------------------
+    const userInfo = { id, username, email, photo };
+    dispatch(addUserInfo(userInfo));
+  };
+
   return (
     <div className="h-screen overflow-y-auto p-2">
       {friends?.map((friend) => (
-        <div onClick={() => setSelect(friend._id)} key={friend._id}>
+        <div onClick={() => handleFriend(friend)} key={friend._id}>
           <Friend friend={friend} select={select}></Friend>
         </div>
       ))}

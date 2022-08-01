@@ -4,8 +4,8 @@ import auth from "../firebase.init";
 import "../styles/globals.css";
 import "react-toastify/dist/ReactToastify.css";
 import Register from "./register";
-import { useEffect } from "react";
-import axios from "axios";
+import { Provider } from "react-redux";
+import { store } from "../store";
 
 export default function MyApp({ Component, pageProps }) {
   const [user, loading] = useAuthState(auth);
@@ -17,5 +17,9 @@ export default function MyApp({ Component, pageProps }) {
     return <Register />;
   }
 
-  return <Component {...pageProps} />;
+  return (
+    <Provider store={store}>
+      <Component {...pageProps} />
+    </Provider>
+  );
 }
