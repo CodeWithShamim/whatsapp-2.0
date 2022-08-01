@@ -1,55 +1,28 @@
-import { useState } from "react";
-import image from "../../../public/images/activeFriend.png";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import Friend from "./Friend";
 
 const Friends = () => {
-  const [select, setSelect] = useState(1);
+  const [friends, setFriends] = useState([]);
+  const [select, setSelect] = useState("");
 
-  const friends = [
-    {
-      _id: 1,
-      name: "shamim",
-      image: image,
-    },
-    {
-      _id: 2,
-      name: "shamim",
-      image: image,
-    },
-    {
-      _id: 3,
-      name: "shamim",
-      image: image,
-    },
-    {
-      _id: 4,
-      name: "shamim",
-      image: image,
-    },
-    {
-      _id: 5,
-      name: "shamim",
-      image: image,
-    },
-    {
-      _id: 6,
-      name: "shamim",
-      image: image,
-    },
-    {
-      _id: 7,
-      name: "shamim",
-      image: image,
-    },
-    {
-      _id: 8,
-      name: "shamim",
-      image: image,
-    },
-  ];
+  useEffect(() => {
+    const getFriends = async () => {
+      try {
+        const { data } = await axios("http://localhost:5000/users");
+        const getfriendLists = data.result.reverse();
+        setFriends(getfriendLists);
+        setSelect(getfriendLists[0]._id);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getFriends();
+  }, []);
+
   return (
     <div className="h-screen overflow-y-auto p-2">
-      {friends.map((friend) => (
+      {friends?.map((friend) => (
         <div onClick={() => setSelect(friend._id)} key={friend._id}>
           <Friend friend={friend} select={select}></Friend>
         </div>

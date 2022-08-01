@@ -9,11 +9,11 @@ import auth from "../firebase.init";
 
 const Home = () => {
   const [user, loading] = useAuthState(auth);
-  // post user data in database
-
   if (loading) {
     return <Loading />;
   }
+
+  // post user data in database
   useEffect(() => {
     const postUser = async () => {
       const newUser = {
