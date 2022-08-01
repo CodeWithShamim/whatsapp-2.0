@@ -3,20 +3,29 @@ import { useEffect, useState } from "react";
 import Friend from "./Friend";
 import { useDispatch } from "react-redux";
 import { addUserInfo } from "../../../features/user/userSlice";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../firebase.init";
 
-const Friends = () => {
+const Friends = ({ searchValue }) => {
   const [friends, setFriends] = useState([]);
   const [select, setSelect] = useState("");
   const dispatch = useDispatch();
+  const [user, loading] = useAuthState(auth);
+  const [searchResult, setSearchResult] = useState([]);
 
   useEffect(() => {
     const getFriends = async () => {
       try {
         const { data } = await axios("http://localhost:5000/users");
-        const getfriendLists = data.result.reverse();
-        setFriends(getfriendLists);
-        setSelect(getfriendLists[0]._id);
-        dispatch(addUserInfo(getfriendLists[0]));
+        const getFriendLists = data.result.reverse();
+
+        // -------filter current user from all user---------
+        const filterFriendLists = getFriendLists.filter(
+          (getFriendList) => getFriendList.email !== user?.email
+        );
+        setFriends(filterFriendLists);
+        setSelect(filterFriendLists[0]._id);
+        dispatch(addUserInfo(filterFriendLists[0]));
       } catch (error) {
         console.log(error);
       }
@@ -24,20 +33,40 @@ const Friends = () => {
     getFriends();
   }, []);
 
+  // -----------dispatch & handle frien info----------------
   const handleFriend = ({ _id: id, username, email, photo }) => {
     setSelect(id);
-    // ------------------
     const userInfo = { id, username, email, photo };
     dispatch(addUserInfo(userInfo));
   };
 
+  // -------------handle search---------------
+  useEffect(() => {
+    const handleSearch = (value) => {
+      const getSearchResult = friends.filter(
+        (friend) => friend.username.toLowerCase().indexOf(value) !== -1
+      );
+      setSearchResult(getSearchResult);
+    };
+    handleSearch(searchValue);
+  }, [searchValue]);
+
   return (
     <div className="h-screen overflow-y-auto p-2">
-      {friends?.map((friend) => (
-        <div onClick={() => handleFriend(friend)} key={friend._id}>
-          <Friend friend={friend} select={select}></Friend>
-        </div>
-      ))}
+      {!searchResult &&
+        friends?.map((friend) => (
+          <div onClick={() => handleFriend(friend)} key={friend._id}>
+            <Friend friend={friend} select={select}></Friend>
+          </div>
+        ))}
+
+      {/* -------maping for search result-------- */}
+      {searchResult &&
+        searchResult?.map((friend) => (
+          <div onClick={() => handleFriend(friend)} key={friend._id}>
+            <Friend friend={friend} select={select}></Friend>
+          </div>
+        ))}
     </div>
   );
 };

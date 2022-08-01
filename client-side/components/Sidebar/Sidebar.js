@@ -7,13 +7,19 @@ import ActiveFriends from "./ActiveFriends.js/ActiveFriends";
 import Friends from "./Friends/Friends";
 
 const Sidebar = () => {
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState("");
+  const [searchValue, setSearchValue] = useState("");
 
   const items = [
     { id: 1, icon: <BiUser /> },
     { id: 2, icon: <AiOutlineUsergroupAdd /> },
     { id: 3, icon: <AiOutlineSetting /> },
   ];
+
+  const handleFriendSearch = (e) => {
+    const searchParams = e.target.value;
+    setSearchValue(searchParams.toLowerCase());
+  };
 
   return (
     <div className="h-screen w-full overflow-hidden">
@@ -23,6 +29,7 @@ const Sidebar = () => {
         </p>
         <input
           type="email"
+          onChange={handleFriendSearch}
           className="bg-base-200 rounded p-3 w-full text-center text-xs outline-secondary focus:outline-accent"
           id="email"
           name="email"
@@ -51,7 +58,7 @@ const Sidebar = () => {
       <ActiveFriends></ActiveFriends>
 
       {/* ---------Friends------------- */}
-      <Friends></Friends>
+      <Friends searchValue={searchValue}></Friends>
     </div>
   );
 };
