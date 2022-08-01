@@ -26,6 +26,7 @@ const RegisterItem = () => {
   const [loadImage, setLoadImage] = useState("");
   const [uploadLoading, setUploadLoading] = useState(false);
   const router = useRouter();
+  const [imageError, setImageError] = useState("");
 
   // -----------handle input--------------
   const handleInput = (e) => {
@@ -78,6 +79,7 @@ const RegisterItem = () => {
             setUploadLoading(false);
           }
         } catch (error) {
+          setImageError(error.message);
           setUploadLoading(false);
         }
       };
@@ -172,6 +174,9 @@ const RegisterItem = () => {
             )}
             {error && <p className="text-primary">Warning! {error.code}</p>}
             {error1 && <p className="text-primary">Warning! {error1.code}</p>}
+            {imageError && (
+              <p className="text-primary">Warning! {imageError}</p>
+            )}
             <p>
               Already have an account?{" "}
               <span className="text-primary font-semibold">
