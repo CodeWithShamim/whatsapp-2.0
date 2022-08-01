@@ -1,38 +1,40 @@
 {
-  "name": "whatsapp-2.0",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "axios": "^0.27.2",
-    "daisyui": "^2.20.0",
-    "firebase": "^9.9.1",
-    "jwt-decode": "^3.1.2",
-    "next": "12.2.3",
-    "node-sass": "^7.0.1",
-    "react": "18.2.0",
-    "react-alert": "^7.0.3",
-    "react-alert-template-basic": "^1.0.2",
-    "react-dom": "18.2.0",
-    "react-firebase-hooks": "^5.0.3",
-    "react-icons": "^4.4.0",
-    "react-redux": "^8.0.2",
-    "react-spinners": "^0.13.3",
-    "react-toastify": "^9.0.7",
-    "redux": "^4.2.0",
-    "redux-thunk": "^2.4.1",
-    "socket.io-client": "^4.5.1"
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.4.7",
-    "eslint": "8.20.0",
-    "eslint-config-next": "12.2.3",
-    "postcss": "^8.4.14",
-    "tailwindcss": "^3.1.6"
-  }
+    "name": "whatsapp-2.0",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "axios": "^0.27.2",
+        "daisyui": "^2.20.0",
+        "firebase": "^9.9.1",
+        "jwt-decode": "^3.1.2",
+        "next": "12.2.3",
+        "node-sass": "^7.0.1",
+        "react": "18.2.0",
+        "react-alert": "^7.0.3",
+        "react-alert-template-basic": "^1.0.2",
+        "react-dom": "18.2.0",
+        "react-firebase-hooks": "^5.0.3",
+        "react-icons": "^4.4.0",
+        "react-redux": "^8.0.2",
+        "react-spinners": "^0.13.3",
+        "react-toastify": "^9.0.7",
+        "redux": "^4.2.0",
+        "redux-thunk": "^2.4.1",
+        "socket.io-client": "^4.5.1"
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.4.7",
+        "eslint": "8.20.0",
+        "eslint-config-next": "12.2.3",
+        "postcss": "^8.4.14",
+        "tailwindcss": "^3.1.6"
+    }
+
+
 }
