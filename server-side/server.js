@@ -4,6 +4,7 @@ var cors = require('cors');
 const port = process.env.PORT || 5000;
 const db = require("./config/database.js");
 const authRoute = require("./routes/authRoute")
+const messageRoute = require("./routes/messageRoute")
 
 app.get("/", (req, res) => {
     res.send("Running");
@@ -15,6 +16,7 @@ app.use(cors());
 
 
 app.use("/users", authRoute)
+app.use("/message", messageRoute)
 
 app.listen(port, () => {
     console.log("Listening to port........", port);

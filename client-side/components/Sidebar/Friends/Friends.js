@@ -44,7 +44,7 @@ const Friends = ({ searchValue }) => {
   useEffect(() => {
     const handleSearch = (value) => {
       const getSearchResult = friends.filter(
-        (friend) => friend.username.toLowerCase().indexOf(value) !== -1
+        (friend) => friend?.username?.toLowerCase()?.indexOf(value) !== -1
       );
       setSearchResult(getSearchResult);
     };
@@ -53,7 +53,7 @@ const Friends = ({ searchValue }) => {
 
   return (
     <div className="h-screen overflow-y-auto p-2">
-      {!searchResult &&
+      {!searchResult?.length > 0 &&
         friends?.map((friend) => (
           <div onClick={() => handleFriend(friend)} key={friend._id}>
             <Friend friend={friend} select={select}></Friend>

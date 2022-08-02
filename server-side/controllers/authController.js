@@ -17,3 +17,10 @@ module.exports.getUsers = async(req, res) => {
     res.status(200).json({ result })
 
 }
+
+module.exports.getCurrentUser = async(req, res) => {
+    const email = req.params.id;
+    const result = await User.find({ email });
+    res.status(200).json({ result })
+
+}
