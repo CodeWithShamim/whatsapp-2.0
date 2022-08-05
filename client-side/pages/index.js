@@ -15,7 +15,6 @@ const Home = () => {
 
   useEffect(() => {
     localStorage.setItem("theme", theme);
-    console.log(theme);
   }, [theme]);
 
   if (loading) {
@@ -51,15 +50,15 @@ const Home = () => {
         <Header />
       </ThemeContext.Provider>
 
-      <div className="h-screen flex flex-col lg:flex-row px-2 md:px-4 lg:px-6 font-serif text-xs">
+      <div className="h-screen flex flex-col lg:flex-row lg:px-6 font-serif text-xs">
         {/* -------------sidebar--------------- */}
-        <div className="lg:w-1/4 shadow-2xl shadow-gray-300 rounded-xl pb-6">
+        <div className="lg:w-1/4 shadow-2xl rounded-xl pb-6">
           <Sidebar />
         </div>
 
         {/* ------chat------ */}
 
-        <div className="lg:w-full">
+        <div className="lg:w-full bg-base-100">
           <Chat />
         </div>
       </div>

@@ -9,7 +9,7 @@ const DefaultMessage = () => {
         src={fdDefaultMsg.photo}
         alt="friendImg"
       />
-      <h2 className="font-semibold text-base">
+      <h2 className="font-semibold">
         Hello, <span className="text-purple-500">{fdDefaultMsg.username}</span>
       </h2>
       <p className="py-4 text-accent">Let's start your message</p>

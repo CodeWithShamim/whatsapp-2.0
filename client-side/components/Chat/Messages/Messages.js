@@ -10,22 +10,26 @@ const Messages = ({ scrollRef }) => {
   const messages = useSelector((state) => state.message.message);
 
   return (
-    <div className="overflow-y-auto h-screen w-full grid gap-5 m-5 pr-10">
+    <div className="overflow-y-auto w-full flex flex-col justify-start h-full gap-3 m-5 pr-10">
       {messages && messages.length > 0 ? (
         <>
           {messages.map((message) =>
             message.senderName === user?.displayName ? (
-              <UserMessage
-                key={message._id}
-                message={message}
-                scrollRef={scrollRef}
-              />
+              <>
+                <UserMessage
+                  key={message._id}
+                  message={message}
+                  scrollRef={scrollRef}
+                ></UserMessage>
+              </>
             ) : (
-              <FriendMessage
-                key={message._id}
-                message={message}
-                scrollRef={scrollRef}
-              ></FriendMessage>
+              <>
+                <FriendMessage
+                  key={message._id}
+                  message={message}
+                  scrollRef={scrollRef}
+                ></FriendMessage>
+              </>
             )
           )}
         </>

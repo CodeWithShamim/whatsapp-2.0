@@ -9,8 +9,10 @@ import {
   RiSendPlane2Fill,
 } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
+import useSound from "use-sound";
 import { getMessage } from "../../features/message/messageSlice";
 import auth from "../../firebase.init";
+// import sendSound from "../../public/audio/send.mp3";
 
 const ChatBox = () => {
   const [user] = useAuthState(auth);
@@ -21,6 +23,7 @@ const ChatBox = () => {
   const [image, setImage] = useState("");
   const [isImageUpload, setIsImageUpload] = useState(false);
   const dispatch = useDispatch();
+  const [sendMsgAudio] = useSound();
 
   // -------get current user id---------
   useEffect(() => {
@@ -82,6 +85,8 @@ const ChatBox = () => {
       );
 
       if (res.data.message === "success") {
+        sendMsgAudio();
+
         setAddMsgSuccess(!addMsgSuccess);
       }
     } catch (error) {
@@ -116,7 +121,7 @@ const ChatBox = () => {
   return (
     <form onSubmit={addMessage} className="m-2 relative">
       <textarea
-        className="w-full border rounded-lg p-2 outline-secondary focus:outline focus:outline-accent"
+        className="w-full text-black border rounded-lg p-2 outline-secondary focus:outline focus:outline-accent"
         placeholder="Message"
         onChange={() => setIsImageUpload(false)}
         name="msg"

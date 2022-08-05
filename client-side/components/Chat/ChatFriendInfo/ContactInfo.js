@@ -8,7 +8,7 @@ const ContactInfo = ({ userInfo }) => {
   };
 
   return (
-    <div className="mx-6 md:mx-10 lg:mx-16 my-6 md:my-8 lg:my-10">
+    <div className="mx-6 md:mx-10 lg:mx-12 my-6 md:my-8 lg:my-10">
       <div className="flex justify-between items-center">
         <h2 className="text-base">Contact Information</h2>
         <button className="text-accent font-medium hover:text-primary">

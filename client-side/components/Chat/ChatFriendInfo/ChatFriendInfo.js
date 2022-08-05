@@ -8,7 +8,7 @@ const ChatFriendInfo = () => {
   // const { id, username, email, photo } = userInfo;
 
   return (
-    <div className="relative text-center h-screen overflow-y-auto rounded-2xl shadow-2xl shadow-gray-200">
+    <div className="relative text-center bg-base-100  h-screen overflow-y-auto rounded-2xl shadow-2xl shadow-gray-200">
       {/* _______header info________ */}
       <HeaderInfo userInfo={userInfo}></HeaderInfo>
       {/* _______contact info________ */}

@@ -21,7 +21,7 @@ const Chat = () => {
     <div className="h-screen w-full flex flex-col lg:flex-row mt-4 lg:mt-0">
       <div className="w-full h-full flex flex-col justify-between">
         {/* ---Header start--- */}
-        <div className="p-2 m-2 rounded-3xl shadow-2xl shadow-gray-200 flex justify-between items-center">
+        <div className="p-2 m-2 rounded-3xl shadow-xl flex justify-between items-center">
           <div className="flex justify-between items-center lg:gap-3">
             <img className="w-10 h-10 rounded-full" src={photo} alt="profile" />
 
@@ -50,17 +50,15 @@ const Chat = () => {
 
       {/* -------------toggle chat friend info--------------- */}
       <div onClick={() => setClose(!close)} className="mt-6 cursor-pointer">
-        {/* ---------close friend info btn---------- */}
         {!close && (
           <div
             onClick={() => setClose(!close)}
-            className="absolute hidden lg:block right-6 top-14 z-50 text-base cursor-pointer p-3"
+            className="absolute hidden lg:block right-6 top-14 z-50 cursor-pointer p-3"
           >
             <AiOutlineClose />
           </div>
         )}
 
-        {/* -----------------show chat friend info-------------- */}
         {close && (
           <div className="text-2xl hidden lg:block">
             <BiChevronRight />
