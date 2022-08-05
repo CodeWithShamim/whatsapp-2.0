@@ -67,8 +67,8 @@ const ChatBox = () => {
     e.preventDefault();
     let textMessage = e.target.msg.value;
     const data = {
-      senderName: currentUser[0].username,
-      senderId: currentUser[0]._id,
+      senderName: currentUser && currentUser[0].username,
+      senderId: currentUser && currentUser[0]._id,
       receiverId: friendInfo._id ? friendInfo._id : friendInfo.id,
       message: {
         text: textMessage ? textMessage : "",
@@ -86,7 +86,7 @@ const ChatBox = () => {
 
       if (res.data.message === "success") {
         sendMsgAudio();
-
+        setImage("");
         setAddMsgSuccess(!addMsgSuccess);
       }
     } catch (error) {

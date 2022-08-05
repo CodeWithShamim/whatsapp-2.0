@@ -23,7 +23,7 @@ const FriendMessage = ({ message: friendMsg, scrollRef }) => {
         <>
           <img
             ref={scrollRef}
-            className="h-36 w-32 rounded-3xl"
+            className="h-36 w-32 rounded"
             src={message?.image}
             alt="messageImg"
           />

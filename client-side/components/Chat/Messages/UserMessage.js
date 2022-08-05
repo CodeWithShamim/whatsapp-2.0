@@ -4,7 +4,7 @@ const UserMessage = ({ message: userMsg, scrollRef }) => {
   const { message } = userMsg;
 
   return (
-    <div className="flex flex-row-reverse gap-1 items-center h-20">
+    <div className="flex flex-row-reverse gap-1 items-center">
       {message.text && (
         <>
           <p
@@ -23,7 +23,7 @@ const UserMessage = ({ message: userMsg, scrollRef }) => {
         <>
           <img
             ref={scrollRef}
-            className="h-36 w-32 rounded-3xl"
+            className="h-36 w-32 rounded"
             src={message?.image}
             alt="messageImg"
           />
