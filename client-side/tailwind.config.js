@@ -12,19 +12,19 @@ module.exports = {
 
             {
                 light: {
-                    primary: "#F54648",
-                    secondary: "#FFFFFF",
-                    accent: "#25ea8e",
-                    neutral: "#3d4451",
+                    "primary": "#F54648",
+                    "secondary": "#FFFFFF",
+                    "accent": "#25ea8e",
+                    "neutral": "#3d4451",
                     "base-100": "#FFFFFF",
                 },
             },
             {
                 dark: {
-                    primary: "#F54648",
-                    secondary: "#FFFFFF",
-                    accent: "#25ea8e",
-                    neutral: "#3d4451",
+                    "primary": "#F54648",
+                    "secondary": "#FFFFFF",
+                    "accent": "#25ea8e",
+                    "neutral": "#3d4451",
                     "base-100": "#0C0F2C",
                 },
             },

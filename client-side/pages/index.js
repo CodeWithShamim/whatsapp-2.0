@@ -53,7 +53,7 @@ const Home = () => {
 
       <div className="h-screen flex flex-col lg:flex-row px-2 md:px-4 lg:px-6 font-serif text-xs">
         {/* -------------sidebar--------------- */}
-        <div className="lg:w-1/4 shadow-2xl rounded-xl pb-6">
+        <div className="lg:w-1/4 shadow-2xl shadow-gray-300 rounded-xl pb-6">
           <Sidebar />
         </div>
 

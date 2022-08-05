@@ -30,7 +30,7 @@ const Sidebar = () => {
         <input
           type="email"
           onChange={handleFriendSearch}
-          className="bg-base-200 rounded p-3 w-full text-center text-xs outline-secondary focus:outline-accent"
+          className="bg-base-200 rounded p-3 w-full text-center text-xs border outline-0 focus:border-accent"
           id="email"
           name="email"
           placeholder="Search people or Messages"

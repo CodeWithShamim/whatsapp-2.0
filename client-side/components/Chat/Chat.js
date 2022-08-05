@@ -21,7 +21,7 @@ const Chat = () => {
     <div className="h-screen w-full flex flex-col lg:flex-row mt-4 lg:mt-0">
       <div className="w-full h-full flex flex-col justify-between">
         {/* ---Header start--- */}
-        <div className="bg-secondary p-2 m-2 rounded-3xl shadow-lg flex justify-between items-center">
+        <div className="p-2 m-2 rounded-3xl shadow-2xl shadow-gray-200 flex justify-between items-center">
           <div className="flex justify-between items-center lg:gap-3">
             <img className="w-10 h-10 rounded-full" src={photo} alt="profile" />
 
