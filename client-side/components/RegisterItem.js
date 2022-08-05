@@ -62,12 +62,12 @@ const RegisterItem = () => {
       const uploadImage = async (img) => {
         setUploadLoading(true);
         const apiKey = "2db9baf808994bd3a320a217ed6a6c0a";
-        const fromData = new FormData();
-        fromData.append("image", img);
+        const formData = new FormData();
+        formData.append("image", img);
         try {
           const res = await axios.post(
             `https://api.imgbb.com/1/upload?key=${apiKey}`,
-            fromData
+            formData
           );
           const photoURL = res?.data?.data?.image?.url;
           if (photoURL) {

@@ -1,56 +1,80 @@
-import image from "../../../public/images/activeFriend.png";
+import image from "../../../public/images/test.png";
 import ActiveFriend from "./ActiveFriend";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addUserInfo } from "../../../features/user/userSlice";
 
 const ActiveFriends = () => {
+  const [isActive, setIsActive] = useState("");
+  const dispatch = useDispatch();
+
+  // -----------dispatch & handle active friend----------------
+  const handleActiveFriend = ({ _id: id, username, email, photo }) => {
+    setIsActive(id);
+    const userInfo = { id, username, email, photo };
+    dispatch(addUserInfo(userInfo));
+  };
+
   const activeFriends = [
     {
       _id: 1,
-      name: "shamim",
-      image: image,
+      username: "shamim1",
+      email: "shamim1@gmail.com",
+      photo: image,
     },
     {
       _id: 2,
-      name: "shamim",
-      image: image,
+      username: "shamim2",
+      email: "shamim2@gmail.com",
+      photo: image,
     },
     {
       _id: 3,
-      name: "shamim",
-      image: image,
+      username: "shamim3",
+      email: "shamim3@gmail.com",
+      photo: image,
     },
     {
       _id: 4,
-      name: "shamim",
-      image: image,
+      username: "shamim1",
+      email: "shamim1@gmail.com",
+      photo: image,
     },
     {
       _id: 5,
-      name: "shamim",
-      image: image,
+      username: "shamim1",
+      email: "shamim1@gmail.com",
+      photo: image,
     },
     {
       _id: 6,
-      name: "shamim",
-      image: image,
+      username: "shamim1",
+      email: "shamim1@gmail.com",
+      photo: image,
     },
     {
       _id: 7,
-      name: "shamim",
-      image: image,
+      username: "shamim1",
+      email: "shamim1@gmail.com",
+      photo: image,
     },
     {
       _id: 8,
-      name: "shamim",
-      image: image,
+      username: "shamim1",
+      email: "shamim1@gmail.com",
+      photo: image,
     },
   ];
   return (
-    <div className="flex overflow-x-auto p-3">
+    <div className="flex overflow-x-auto px-2 pt-2">
       {activeFriends.map((activeFriend) => (
-        <ActiveFriend
-          key={activeFriend._id}
-          activeFriend={activeFriend}
-        ></ActiveFriend>
+        <div className="m-2" onClick={() => handleActiveFriend(activeFriend)}>
+          <ActiveFriend
+            key={activeFriend._id}
+            activeFriend={activeFriend}
+            isActive={isActive}
+          ></ActiveFriend>
+        </div>
       ))}
     </div>
   );

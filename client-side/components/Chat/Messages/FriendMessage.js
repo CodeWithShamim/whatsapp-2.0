@@ -1,17 +1,40 @@
 import { RiMoreLine } from "react-icons/ri";
 
-const FriendMessage = ({ friendMsg }) => {
-  const { message, date } = friendMsg;
+const FriendMessage = ({ message: friendMsg, scrollRef }) => {
+  const { message } = friendMsg;
+
   return (
-    <div>
+    <div className="flex gap-5 flex-col items-start">
       <div className="flex gap-1 items-center">
-        <p className="bg-gray-200 px-4 py-6 rounded-xl">{message}</p>
-        {/* ----morevertIcon---- */}
-        <p className="text-sm cursor-pointer">
-          <RiMoreLine />
-        </p>
+        {message.text && (
+          <>
+            <p
+              ref={scrollRef}
+              className="bg-gray-300 px-3 py-4 rounded-xl text-secondary"
+            >
+              {message.text}
+            </p>
+            <p className="text-sm cursor-pointer">
+              <RiMoreLine />
+            </p>
+          </>
+        )}
+
+        {message.image && (
+          <>
+            <img
+              ref={scrollRef}
+              className="h-36 w-32 rounded-3xl"
+              src={message?.image}
+              alt="messageImg"
+            />
+            <p className="text-sm cursor-pointer">
+              <RiMoreLine />
+            </p>
+          </>
+        )}
       </div>
-      <p className="text-bold text-gray-400">{date}</p>
+      {/* <p className="text-bold text-gray-400">{date}</p> */}
     </div>
   );
 };

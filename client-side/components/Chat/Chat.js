@@ -2,16 +2,20 @@ import { AiOutlineClose, AiOutlineMore } from "react-icons/ai";
 import ChatBox from "./ChatBox";
 import ChatFriendInfo from "./ChatFriendInfo/ChatFriendInfo";
 import Messages from "./Messages/Messages";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BiChevronRight } from "react-icons/bi";
 import { useSelector } from "react-redux";
 
 const Chat = () => {
-  const isOnline = window.navigator.onLine;
   const [close, setClose] = useState(false);
-
   const userInfo = useSelector((state) => state.user.userInfo);
   const { id, username, email, photo } = userInfo;
+  const scrollRef = useRef();
+  const messages = useSelector((state) => state.message.message);
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   return (
     <div className="h-screen w-full flex flex-col lg:flex-row mt-4 lg:mt-0">
@@ -23,14 +27,9 @@ const Chat = () => {
 
             <div>
               <h2>{username}</h2>
-              <p>
-                {isOnline ? (
-                  <span>
-                    <span className="badge badge-xs badge-accent"></span> online
-                  </span>
-                ) : (
-                  <span>offline</span>
-                )}
+              <p className="flex  items-center justify-start">
+                <span className="badge badge-xs badge-accent mr-1"></span>
+                online
               </p>
             </div>
           </div>
@@ -43,7 +42,7 @@ const Chat = () => {
         {/* ---Header end--- */}
 
         {/* --------------------------Message content---------------------------- */}
-        <Messages></Messages>
+        <Messages scrollRef={scrollRef}></Messages>
 
         {/* ------chatbox---- */}
         <ChatBox />
@@ -63,7 +62,7 @@ const Chat = () => {
 
         {/* -----------------show chat friend info-------------- */}
         {close && (
-          <div className="text-2xl">
+          <div className="text-2xl hidden lg:block">
             <BiChevronRight />
           </div>
         )}

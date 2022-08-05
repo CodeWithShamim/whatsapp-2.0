@@ -8,13 +8,19 @@ import {
   RiGiftFill,
   RiSendPlane2Fill,
 } from "react-icons/ri";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getMessage } from "../../features/message/messageSlice";
 import auth from "../../firebase.init";
 
 const ChatBox = () => {
   const [user] = useAuthState(auth);
   const friendInfo = useSelector((state) => state.user.userInfo);
   const [currentUser, setCurrentUser] = useState([]);
+  const [message, setMessage] = useState([]);
+  const [addMsgSuccess, setAddMsgSuccess] = useState(false);
+  const [image, setImage] = useState("");
+  const [isImageUpload, setIsImageUpload] = useState(false);
+  const dispatch = useDispatch();
 
   // -------get current user id---------
   useEffect(() => {
@@ -27,19 +33,46 @@ const ChatBox = () => {
     findCurrentUser();
   }, [user?.email]);
 
-  // -------get message data-------
-  const getMessage = async (e) => {
+  // get image
+  const handleImage = async (e) => {
+    setIsImageUpload(true);
+    if (e.target.files.length !== 0) {
+      const image = e.target.files[0];
+      const formData = new FormData();
+      formData.append("image", image);
+      const apiKey = "2db9baf808994bd3a320a217ed6a6c0a";
+
+      // ------upload image--------
+      try {
+        const res = await axios.post(
+          `https://api.imgbb.com/1/upload?key=${apiKey}`,
+          formData
+        );
+        const photoURL = res?.data?.data?.image?.url;
+        setImage(photoURL);
+        setIsImageUpload(false);
+      } catch (error) {
+        console.log(error);
+        // setIsImageUpload(false);
+      }
+    } else {
+      alert("Please! select an image");
+    }
+  };
+  // -------add message-------
+  const addMessage = async (e) => {
     e.preventDefault();
-    const textMessage = e.target.msg.value;
+    let textMessage = e.target.msg.value;
     const data = {
       senderName: currentUser[0].username,
       senderId: currentUser[0]._id,
       receiverId: friendInfo._id ? friendInfo._id : friendInfo.id,
       message: {
-        text: textMessage,
-        image: "",
+        text: textMessage ? textMessage : "",
+        image: image ? image : "",
       },
     };
+    e.target.msg.value = "";
 
     // ---post message data---
     try {
@@ -47,17 +80,45 @@ const ChatBox = () => {
         "http://localhost:5000/message/addMessage",
         data
       );
-      console.log(res);
+
+      if (res.data.message === "success") {
+        setAddMsgSuccess(!addMsgSuccess);
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
+  // --------get message---------
+  useEffect(() => {
+    const getMessage = async (fdId, myId) => {
+      try {
+        const res = await axios(
+          `http://localhost:5000/message/getMessage?fdId=${fdId}&&myId=${myId}`
+        );
+        setMessage(res.data.result);
+        console.log(res.data.result);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getMessage(
+      friendInfo._id ? friendInfo._id : friendInfo.id,
+      currentUser[0]?._id
+    );
+  }, [friendInfo, addMsgSuccess]);
+
+  // ----------dispatch message----------
+  useEffect(() => {
+    dispatch(getMessage(message));
+  }, [message]);
+
   return (
-    <form onSubmit={getMessage} className="m-2 relative">
+    <form onSubmit={addMessage} className="m-2 relative">
       <textarea
         className="w-full border rounded-lg p-2 outline-secondary focus:outline focus:outline-accent"
         placeholder="Message"
+        onChange={() => setIsImageUpload(false)}
         name="msg"
         id="msg"
         cols="30"
@@ -90,7 +151,13 @@ const ChatBox = () => {
           <label className="cursor-pointer" htmlFor="image">
             <RiGalleryFill />
           </label>
-          <input className="hidden" type="file" name="image" id="image" />
+          <input
+            onChange={handleImage}
+            className="hidden"
+            type="file"
+            name="image"
+            id="image"
+          />
         </span>
 
         {/* -----gif image---------- */}
@@ -99,8 +166,10 @@ const ChatBox = () => {
         </span>
 
         <label
-          htmlFor="message"
-          className="text-xs text-secondary bg-primary p-[5px] rounded-full cursor-pointer"
+          htmlFor={isImageUpload ? "" : "message"}
+          className={`text-xs text-secondary bg-primary p-[5px] rounded-full cursor-pointer ${
+            isImageUpload && "bg-gray-400"
+          }`}
         >
           <RiSendPlane2Fill />
         </label>
