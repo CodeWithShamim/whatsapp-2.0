@@ -1,14 +1,23 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useState, useEffect, createContext } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Chat from "../components/Chat/Chat";
 import Header from "../components/Header";
 import Loading from "../components/Loading";
 import Sidebar from "../components/Sidebar/Sidebar";
 import auth from "../firebase.init";
+export const ThemeContext = createContext("theme");
 
 const Home = () => {
   const [user, loading] = useAuthState(auth);
+  const themeToggle = JSON.parse(localStorage.getItem("theme"));
+  const [theme, setTheme] = useState(themeToggle || false);
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    console.log(theme);
+  }, [theme]);
+
   if (loading) {
     return <Loading />;
   }
@@ -36,9 +45,11 @@ const Home = () => {
   }, [user]);
 
   return (
-    <>
-      {/* ---------header----------- */}
-      <Header />
+    <div data-theme={theme ? "dark" : "light"}>
+      <ThemeContext.Provider value={[theme, setTheme]}>
+        {/* ---------header----------- */}
+        <Header />
+      </ThemeContext.Provider>
 
       <div className="h-screen flex flex-col lg:flex-row px-2 md:px-4 lg:px-6 font-serif text-xs">
         {/* -------------sidebar--------------- */}
@@ -52,7 +63,7 @@ const Home = () => {
           <Chat />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
