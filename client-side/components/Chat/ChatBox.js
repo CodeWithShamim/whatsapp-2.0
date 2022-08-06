@@ -12,7 +12,6 @@ import { useDispatch, useSelector } from "react-redux";
 import useSound from "use-sound";
 import { getMessage } from "../../features/message/messageSlice";
 import auth from "../../firebase.init";
-// import sendSound from "../../public/audio/send.mp3";
 
 const ChatBox = () => {
   const [user] = useAuthState(auth);

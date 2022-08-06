@@ -1,12 +1,14 @@
 import image from "../../../public/images/test.png";
 import ActiveFriend from "./ActiveFriend";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUserInfo } from "../../../features/user/userSlice";
+import { io } from "socket.io-client";
 
 const ActiveFriends = () => {
   const [isActive, setIsActive] = useState("");
   const dispatch = useDispatch();
+  const socket = useRef();
 
   // -----------dispatch & handle active friend----------------
   const handleActiveFriend = ({ _id: id, username, email, photo }) => {
@@ -14,6 +16,11 @@ const ActiveFriends = () => {
     const userInfo = { id, username, email, photo };
     dispatch(addUserInfo(userInfo));
   };
+
+  // connect with socket
+  useEffect(() => {
+    socket.current = io("ws://localhost:8000");
+  }, []);
 
   const activeFriends = [
     {
