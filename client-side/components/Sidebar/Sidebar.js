@@ -1,9 +1,8 @@
 import { AiOutlineSearch } from "react-icons/ai";
 import { BiUser } from "react-icons/bi";
 import { AiOutlineUsergroupAdd, AiOutlineSetting } from "react-icons/ai";
-import { useRouter } from "next/router";
 import { useState } from "react";
-import ActiveFriends from "./ActiveFriends.js/ActiveFriends";
+import ActiveUsers from "./ActiveUsers/ActiveUsers";
 import Friends from "./Friends/Friends";
 
 const Sidebar = () => {
@@ -55,7 +54,7 @@ const Sidebar = () => {
       </div>
 
       {/* -----------------active friends-------------------- */}
-      <ActiveFriends></ActiveFriends>
+      <ActiveUsers></ActiveUsers>
 
       {/* ---------Friends------------- */}
       <Friends searchValue={searchValue}></Friends>

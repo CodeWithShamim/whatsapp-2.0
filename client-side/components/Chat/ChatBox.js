@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { AiFillCalendar } from "react-icons/ai";
 import {
@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import useSound from "use-sound";
 import { getMessage } from "../../features/message/messageSlice";
 import auth from "../../firebase.init";
+import { io } from "socket.io-client";
+import { addActiveUser } from "../../features/user/activeUserSlice";
 
 const ChatBox = () => {
   const [user] = useAuthState(auth);
@@ -23,6 +25,22 @@ const ChatBox = () => {
   const [isImageUpload, setIsImageUpload] = useState(false);
   const dispatch = useDispatch();
   const [sendMsgAudio] = useSound();
+  const socket = useRef();
+
+  // connect with socket
+  useEffect(() => {
+    socket.current = io("ws://localhost:8000");
+  }, []);
+  // send active user info
+  useEffect(() => {
+    socket.current.emit("addActiveUser", currentUser[0]);
+    // get active user
+    socket.current.on("getActiveUser", (activeUser) => {
+      if (activeUser) {
+        dispatch(addActiveUser(activeUser));
+      }
+    });
+  }, [currentUser]);
 
   // -------get current user id---------
   useEffect(() => {
@@ -101,7 +119,7 @@ const ChatBox = () => {
           `http://localhost:5000/message/getMessage?fdId=${fdId}&&myId=${myId}`
         );
         setMessage(res.data.result);
-        console.log(res.data.result);
+        // console.log(res.data.result);
       } catch (error) {
         console.log(error);
       }

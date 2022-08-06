@@ -7,7 +7,7 @@ const ActiveFriend = ({ activeFriend, isActive }) => {
         className={`w-16 h-14 rounded-full border-2 ${
           isActive === _id && "border-accent"
         }`}
-        src="images/test.png"
+        src={photo}
         alt={username}
       />
       <span className="absolute right-0 badge badge-xs badge-accent"></span>
