@@ -23,7 +23,8 @@ const removeActiveUser = (disconnectSocketId) => {
 };
 // ---------check frind---------
 const findFriend = (fdId) => {
-  return activeUsers?.filter((activeUser) => activeUser._id === fdId);
+  console.log("activeUsers", activeUsers);
+  return activeUsers?.find((activeUser) => activeUser._id === fdId);
 };
 
 io.on("connection", (socket) => {
@@ -37,8 +38,9 @@ io.on("connection", (socket) => {
 
   // received message
   socket.on("sendMessage", (data) => {
+    console.log("data", data);
     const user = findFriend(data?.receiverId);
-    console.log(user);
+    console.log("dd", user);
   });
 
   socket.on("disconnect", () => {
