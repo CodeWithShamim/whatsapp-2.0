@@ -10,7 +10,10 @@ import {
 } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import useSound from "use-sound";
-import { getMessage } from "../../features/message/messageSlice";
+import {
+  getMessage,
+  getSocketMessage,
+} from "../../features/message/messageSlice";
 import auth from "../../firebase.init";
 import { io } from "socket.io-client";
 import { addActiveUser } from "../../features/user/activeUserSlice";
@@ -20,6 +23,7 @@ const ChatBox = () => {
   const friendInfo = useSelector((state) => state.user.userInfo);
   const [currentUser, setCurrentUser] = useState([]);
   const [message, setMessage] = useState([]);
+  const [socketMessage, setSocketMessage] = useState([]);
   const [addMsgSuccess, setAddMsgSuccess] = useState(false);
   const [image, setImage] = useState("");
   const [isImageUpload, setIsImageUpload] = useState(false);
@@ -30,16 +34,32 @@ const ChatBox = () => {
   // connect with socket
   useEffect(() => {
     socket.current = io("ws://localhost:8000");
+    socket.current.on("getMessage", (data) => {
+      setSocketMessage(data);
+    });
   }, []);
+
   // send active user info
   useEffect(() => {
     socket.current.emit("addActiveUser", currentUser[0]);
     // get active user
     socket.current.on("getActiveUser", (activeUser) => {
       dispatch(addActiveUser(activeUser));
-      console.log("object");
     });
   }, [currentUser]);
+
+  // dispatch socket message
+  useEffect(() => {
+    if (socketMessage && friendInfo && currentUser) {
+      if (
+        socketMessage.senderId === friendInfo.id &&
+        socketMessage.receiverId === currentUser[0]._id
+      ) {
+        dispatch(getSocketMessage(socketMessage));
+        setSocketMessage([]);
+      }
+    }
+  }, [socketMessage]);
 
   // -------get current user id---------
   useEffect(() => {

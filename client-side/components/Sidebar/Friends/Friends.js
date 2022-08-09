@@ -25,7 +25,10 @@ const Friends = ({ searchValue }) => {
         );
         setFriends(filterFriendLists);
         setSelect(filterFriendLists[0]._id);
-        dispatch(addUserInfo(filterFriendLists[0]));
+        // dispatch(addUserInfo(filterFriendLists[0]));
+        setTimeout(() => {
+          dispatch(addUserInfo(filterFriendLists[0]));
+        }, 0);
       } catch (error) {
         console.log(error);
       }

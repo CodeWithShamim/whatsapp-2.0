@@ -7,6 +7,7 @@ const io = require("socket.io")(8000, {
 
 // -------acitve user-----------
 let activeUsers = [];
+
 // ------add active user-------
 const addActiveUser = (activeUser, socketId) => {
   const isActiveUser = activeUsers.some((au) => au?._id === activeUser?._id);
@@ -23,8 +24,9 @@ const removeActiveUser = (disconnectSocketId) => {
 };
 // ---------check frind---------
 const findFriend = (fdId) => {
-  console.log("activeUsers", activeUsers);
-  return activeUsers?.find((activeUser) => activeUser._id === fdId);
+  if (activeUsers) {
+    return activeUsers?.find((activeUser) => activeUser._id === fdId);
+  }
 };
 
 io.on("connection", (socket) => {
@@ -38,9 +40,12 @@ io.on("connection", (socket) => {
 
   // received message
   socket.on("sendMessage", (data) => {
-    console.log("data", data);
     const user = findFriend(data?.receiverId);
-    console.log("dd", user);
+    console.log(user);
+    // --------send messsage--------
+    if (user !== undefined) {
+      io.to(user?.socketId).emit("getMessage", data);
+    }
   });
 
   socket.on("disconnect", () => {

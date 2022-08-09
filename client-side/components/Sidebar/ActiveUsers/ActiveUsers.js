@@ -14,7 +14,6 @@ const ActiveFriends = () => {
 
   // filter current user from active user
   useEffect(() => {
-    console.log("Hang");
     const filterUsers = activeUsers?.filter((au) => au.email !== user?.email);
     setFliterActiveUsers(filterUsers);
   }, [activeUsers]);
