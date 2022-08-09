@@ -5,7 +5,7 @@ const UserMessage = ({ message: userMsg, scrollRef }) => {
 
   return (
     <div className="flex flex-row-reverse gap-1 items-center">
-      {message.text && (
+      {message?.text && (
         <>
           <p
             ref={scrollRef}
@@ -19,7 +19,7 @@ const UserMessage = ({ message: userMsg, scrollRef }) => {
         </>
       )}
 
-      {message.image && (
+      {message?.image && (
         <>
           <img
             ref={scrollRef}

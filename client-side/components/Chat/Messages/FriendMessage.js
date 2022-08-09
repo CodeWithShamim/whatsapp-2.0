@@ -5,7 +5,7 @@ const FriendMessage = ({ message: friendMsg, scrollRef }) => {
 
   return (
     <div className="flex gap-1 items-center">
-      {message.text && (
+      {message?.text && (
         <>
           <p
             ref={scrollRef}
@@ -19,7 +19,7 @@ const FriendMessage = ({ message: friendMsg, scrollRef }) => {
         </>
       )}
 
-      {message.image && (
+      {message?.image && (
         <>
           <img
             ref={scrollRef}

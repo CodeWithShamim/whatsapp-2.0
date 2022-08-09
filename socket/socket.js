@@ -15,16 +15,37 @@ const addActiveUser = (activeUser, socketId) => {
   }
 };
 
+// remove active user
+const removeActiveUser = (disconnectSocketId) => {
+  activeUsers = activeUsers?.filter(
+    (activeUsr) => activeUsr.socketId !== disconnectSocketId
+  );
+};
+// ---------check frind---------
+const findFriend = (fdId) => {
+  return activeUsers?.filter((activeUser) => activeUser._id === fdId);
+};
+
 io.on("connection", (socket) => {
   console.log("Socket is connecting....");
 
   // ------add active user-------
   socket.on("addActiveUser", (activeUser) => {
-    addActiveUser(activeUser, socket.id);
+    addActiveUser(activeUser, socket?.id);
     io.emit("getActiveUser", activeUsers);
+  });
+
+  // received message
+  socket.on("sendMessage", (data) => {
+    const user = findFriend(data?.receiverId);
+    console.log(user);
   });
 
   socket.on("disconnect", () => {
     console.log("Socket is disconnected");
+    removeActiveUser(socket?.id);
+    setTimeout(() => {
+      io.emit("getActiveUser", activeUsers);
+    }, 1000);
   });
 });

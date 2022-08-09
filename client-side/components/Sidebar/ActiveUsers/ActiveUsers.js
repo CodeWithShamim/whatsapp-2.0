@@ -15,8 +15,6 @@ const ActiveFriends = () => {
     dispatch(addUserInfo(userInfo));
   };
 
-  console.log(activeUsers);
-
   return (
     <div className="flex overflow-x-auto px-2 pt-2">
       {activeUsers?.map((activeUser) => (

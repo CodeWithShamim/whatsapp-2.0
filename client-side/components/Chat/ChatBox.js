@@ -36,9 +36,8 @@ const ChatBox = () => {
     socket.current.emit("addActiveUser", currentUser[0]);
     // get active user
     socket.current.on("getActiveUser", (activeUser) => {
-      if (activeUser) {
-        dispatch(addActiveUser(activeUser));
-      }
+      dispatch(addActiveUser(activeUser));
+      console.log("object");
     });
   }, [currentUser]);
 
@@ -93,6 +92,9 @@ const ChatBox = () => {
       },
     };
     e.target.msg.value = "";
+
+    // send message to socket
+    socket.current.emit("sendMessage", data);
 
     // ---post message data---
     try {
