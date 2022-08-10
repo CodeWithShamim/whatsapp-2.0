@@ -15,7 +15,7 @@ const Friend = ({ friend, select }) => {
         height={60}
         width={60}
         // layout="fill"
-        // objectFit="contain"
+        objectFit="cover"
         className="rounded-full"
       />
       <div className="flex flex-col gap-2 justify-center">

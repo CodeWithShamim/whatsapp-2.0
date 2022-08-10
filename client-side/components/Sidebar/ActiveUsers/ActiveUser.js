@@ -15,6 +15,7 @@ const ActiveFriend = ({ activeFriend, isActive }) => {
           alt={username}
           height={70}
           width={70}
+          objectFit="cover"
           className="rounded-full"
         />
         <span className="absolute bottom-0 right-1 border border-secondary badge badge-xs badge-accent"></span>

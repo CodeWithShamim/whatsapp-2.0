@@ -5,6 +5,8 @@ import Messages from "./Messages/Messages";
 import { useEffect, useRef, useState } from "react";
 import { BiChevronRight } from "react-icons/bi";
 import { useSelector } from "react-redux";
+import Image from "next/image";
+import { RiWifiOffLine } from "react-icons/ri";
 
 const Chat = () => {
   const [close, setClose] = useState(false);
@@ -13,10 +15,22 @@ const Chat = () => {
   const scrollRef = useRef();
   const messages = useSelector((state) => state.message.message);
   const typingMessage = useSelector((state) => state.message.typingMessage);
+  const activeUsers = useSelector((state) => state.activeUser.activeUser);
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, typingMessage]);
+
+  // --------check friend online / offline -----------
+  useEffect(() => {
+    const isActiveFriend = activeUsers?.some((au) => au._id === id);
+    if (isActiveFriend) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+  }, [userInfo, isActive, activeUsers]);
 
   return (
     <div className="h-screen w-full flex flex-col lg:flex-row mt-4 lg:mt-0">
@@ -24,13 +38,31 @@ const Chat = () => {
         {/* ---Header start--- */}
         <div className="p-2 m-2 rounded-3xl shadow-xl flex justify-between items-center">
           <div className="flex justify-between items-center lg:gap-3">
-            <img className="w-10 h-10 rounded-full" src={photo} alt="profile" />
+            <Image
+              className="rounded-full"
+              src={photo}
+              height={50}
+              width={50}
+              objectFit="cover"
+              alt={username}
+            />
 
             <div>
               <h2>{username}</h2>
               <p className="flex  items-center justify-start">
-                <span className="badge badge-xs badge-accent mr-1"></span>
-                online
+                {isActive ? (
+                  <>
+                    <span className="badge badge-xs badge-accent mr-1"></span>
+                    <span>online</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="text-sm pr-1">
+                      <RiWifiOffLine />
+                    </span>
+                    <span className="">offline</span>
+                  </>
+                )}
               </p>
             </div>
           </div>
