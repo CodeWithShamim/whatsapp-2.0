@@ -1,7 +1,11 @@
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { AiFillCalendar } from "react-icons/ai";
+import {
+  AiFillCalendar,
+  AiOutlineClose,
+  AiOutlineCloseCircle,
+} from "react-icons/ai";
 import {
   RiAttachment2,
   RiGalleryFill,
@@ -19,6 +23,8 @@ import auth from "../../firebase.init";
 import { io } from "socket.io-client";
 import { addActiveUser } from "../../features/user/activeUserSlice";
 import { toast } from "react-toastify";
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
 // import msgSound from "../../public/sounds/send.mp3";
 // import notificationSound from "../../public/sounds/notification.mp3";
 
@@ -32,6 +38,8 @@ const ChatBox = () => {
   const [addMsgSuccess, setAddMsgSuccess] = useState(false);
   const [image, setImage] = useState("");
   const [isImageUpload, setIsImageUpload] = useState(false);
+  const [isShowEmoji, setIsShowEmoji] = useState(false);
+  const [emoji, setEmoji] = useState(null);
   const dispatch = useDispatch();
   const [sendMsgAudio] = useSound();
   const [sendNotificationAudio] = useSound();
@@ -144,7 +152,7 @@ const ChatBox = () => {
       message: "",
     });
 
-    let textMessage = e.target.msg.value;
+    let textMessage = e.target.msg.value || emoji;
     const data = {
       senderName: currentUser && currentUser[0].username,
       senderId: currentUser && currentUser[0]._id,
@@ -170,6 +178,7 @@ const ChatBox = () => {
         sendMsgAudio();
         setImage("");
         setAddMsgSuccess(!addMsgSuccess);
+        setEmoji(null);
       }
     } catch (error) {
       console.log(error);
@@ -214,11 +223,19 @@ const ChatBox = () => {
     socket.current.emit("typingMessage", data);
   };
 
+  // set emoji
+  const handleEmojiPicker = (emoji) => {
+    if (emoji?.native) {
+      setIsShowEmoji(!isShowEmoji);
+      setEmoji(emoji.native);
+    }
+  };
+
   return (
     <form onSubmit={addMessage} className="m-2 relative">
       <textarea
         className="w-full text-black border rounded-lg p-2 outline-secondary focus:outline focus:outline-accent"
-        placeholder="Message"
+        placeholder={emoji ? "" : "Message"}
         onChange={handleInputChanges}
         name="msg"
         id="msg"
@@ -226,11 +243,25 @@ const ChatBox = () => {
         rows="4"
       ></textarea>
 
+      <div className="absolute top-5 left-3 text-xl">{emoji && emoji}</div>
+
       {/* -------emoji section-------------- */}
       <div className="absolute right-3 bottom-14 text-xl cursor-pointer">
-        <span>
-          <AiFillCalendar />
-        </span>
+        <div
+          className="text-primary font-bold"
+          onClick={() => setIsShowEmoji(!isShowEmoji)}
+        >
+          {isShowEmoji ? <AiOutlineCloseCircle size={25} /> : <span>😍</span>}
+        </div>
+
+        <div>
+          {isShowEmoji && (
+            <Picker
+              data={data}
+              onEmojiSelect={(emoji) => handleEmojiPicker(emoji)}
+            />
+          )}
+        </div>
       </div>
 
       <div className="flex justify-end items-center gap-3 text-slate-400">
