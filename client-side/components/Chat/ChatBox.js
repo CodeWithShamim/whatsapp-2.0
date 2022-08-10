@@ -19,6 +19,8 @@ import auth from "../../firebase.init";
 import { io } from "socket.io-client";
 import { addActiveUser } from "../../features/user/activeUserSlice";
 import { toast } from "react-toastify";
+// import msgSound from "../../public/sounds/send.mp3";
+// import notificationSound from "../../public/sounds/notification.mp3";
 
 const ChatBox = () => {
   const [user] = useAuthState(auth);
