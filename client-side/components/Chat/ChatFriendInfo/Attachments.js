@@ -1,5 +1,7 @@
+import Image from "next/image";
+
 const Attachments = ({ userInfo }) => {
-  const { photo } = userInfo;
+  const { photo, username } = userInfo;
 
   const attachments = [photo, photo, photo, photo, photo, photo];
   return (
@@ -13,9 +15,17 @@ const Attachments = ({ userInfo }) => {
       <hr className="my-3 lg:my-6" />
 
       {/* --------set attachments image--------- */}
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-3 gap-5">
         {attachments?.map((img) => (
-          <img className="w-20 h-24 rounded" src={img} alt="attachment_image" />
+          <div className="w-20 h-24 rounded">
+            <Image
+              src={img}
+              height={160}
+              width={120}
+              objectFit="cover"
+              alt={username}
+            />
+          </div>
         ))}
       </div>
     </div>

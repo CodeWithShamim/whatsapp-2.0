@@ -1,4 +1,5 @@
 import { RiMoreLine } from "react-icons/ri";
+import Image from "next/image";
 
 const FriendMessage = ({ message: friendMsg, scrollRef }) => {
   const { message } = friendMsg;
@@ -21,12 +22,16 @@ const FriendMessage = ({ message: friendMsg, scrollRef }) => {
 
       {message?.image && (
         <>
-          <img
-            ref={scrollRef}
-            className="h-36 w-32 rounded"
-            src={message?.image}
-            alt="messageImg"
-          />
+          <div ref={scrollRef} className="h-36 w-32">
+            <Image
+              src={message?.image}
+              height={180}
+              width={150}
+              objectFit="cover"
+              alt="messageImg"
+              className="rounded-sm"
+            />
+          </div>
           <p className="text-sm cursor-pointer">
             <RiMoreLine />
           </p>

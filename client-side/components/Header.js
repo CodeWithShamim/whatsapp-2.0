@@ -4,6 +4,7 @@ import { signOut } from "firebase/auth";
 import { BiLogInCircle } from "react-icons/bi";
 import { ThemeContext } from "../pages";
 import { useContext } from "react";
+import Image from "next/image";
 
 const Header = () => {
   const [user] = useAuthState(auth);
@@ -47,8 +48,14 @@ const Header = () => {
           </div>
 
           <div className="avatar online">
-            <div className="w-10 rounded-2xl">
-              <img src={user?.photoURL} />
+            <div className="w-10 rounded-md">
+              <Image
+                src={user?.photoURL}
+                height={50}
+                width={50}
+                objectFit="cover"
+                alt={user?.displayName}
+              />
             </div>
           </div>
           {/* ---log out--- */}

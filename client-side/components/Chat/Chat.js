@@ -47,9 +47,9 @@ const Chat = () => {
               alt={username}
             />
 
-            <div>
+            <div className="pl-2 lg:pl-0">
               <h2>{username}</h2>
-              <p className="flex  items-center justify-start">
+              <p className="flex items-center justify-start  ">
                 {isActive ? (
                   <>
                     <span className="badge badge-xs badge-accent mr-1"></span>

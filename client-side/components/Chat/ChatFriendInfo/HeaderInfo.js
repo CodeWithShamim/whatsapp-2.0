@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const HeaderInfo = ({ userInfo }) => {
   const { id, username, email, photo } = userInfo;
 
@@ -8,11 +10,16 @@ const HeaderInfo = ({ userInfo }) => {
 
   return (
     <div className="text-center grid gap-2 justify-center items-center m-3">
-      <img
-        className="w-16 h-16 rounded-full mx-auto mt-6"
-        src={photo}
-        alt={username}
-      />
+      <div className="w-16 h-16 mx-auto mt-6">
+        <Image
+          src={photo}
+          alt={username}
+          height={80}
+          width={80}
+          objectFit="cover"
+          className="rounded-full "
+        />
+      </div>
       <h2 className="font-semibold">{username}</h2>
       <h2>{defaultValue.position}</h2>
       <p className="text-gray-400">{defaultValue.location}</p>
