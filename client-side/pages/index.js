@@ -7,6 +7,8 @@ import Loading from "../components/Loading";
 import Sidebar from "../components/Sidebar/Sidebar";
 import auth from "../firebase.init";
 export const ThemeContext = createContext("theme");
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
   const [user, loading] = useAuthState(auth);
@@ -62,6 +64,7 @@ const Home = () => {
           <Chat />
         </div>
       </div>
+      <ToastContainer></ToastContainer>
     </div>
   );
 };

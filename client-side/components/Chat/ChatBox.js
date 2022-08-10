@@ -18,6 +18,7 @@ import {
 import auth from "../../firebase.init";
 import { io } from "socket.io-client";
 import { addActiveUser } from "../../features/user/activeUserSlice";
+import { toast } from "react-toastify";
 
 const ChatBox = () => {
   const [user] = useAuthState(auth);
@@ -31,6 +32,7 @@ const ChatBox = () => {
   const [isImageUpload, setIsImageUpload] = useState(false);
   const dispatch = useDispatch();
   const [sendMsgAudio] = useSound();
+  const [sendNotificationAudio] = useSound();
   const socket = useRef();
 
   // connect with socket
@@ -63,12 +65,31 @@ const ChatBox = () => {
   // dispatch socket message
   useEffect(() => {
     if (socketMessage && friendInfo && currentUser) {
+      const friendInfoId = friendInfo?._id ? friendInfo._id : friendInfo.id;
+
       if (
-        socketMessage.senderId === friendInfo.id &&
-        socketMessage.receiverId === currentUser[0]._id
+        socketMessage.senderId === friendInfoId &&
+        socketMessage.receiverId === currentUser[0]?._id
       ) {
         dispatch(getSocketMessage(socketMessage));
         setSocketMessage([]);
+      }
+
+      // ----------show message notification---------
+      if (
+        socketMessage.senderId !== friendInfoId &&
+        socketMessage.receiverId === currentUser[0]?._id
+      ) {
+        sendNotificationAudio();
+        toast.success(`💬 ${socketMessage?.senderName} send a new message`, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
     }
   }, [socketMessage]);
@@ -217,6 +238,7 @@ const ChatBox = () => {
             <RiAttachment2 />
           </label>
           <input
+            onChange={handleImage}
             className="hidden"
             type="file"
             name="attachment"
