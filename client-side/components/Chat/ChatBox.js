@@ -231,12 +231,27 @@ const ChatBox = () => {
     }
   };
 
+  // handle Keypress Event
+  const handleKeypressEvent = (e) => {
+    if (e.key === "Enter") {
+      document.getElementById("message").click();
+      // emty typing message
+      socket.current.emit("typingMessage", {
+        senderName: currentUser && currentUser[0].username,
+        senderId: currentUser && currentUser[0]._id,
+        receiverId: friendInfo._id ? friendInfo._id : friendInfo.id,
+        message: "",
+      });
+    }
+  };
+
   return (
     <form onSubmit={addMessage} className="m-2 relative">
       <textarea
         className="w-full text-black border rounded-lg p-2 outline-secondary focus:outline focus:outline-accent"
         placeholder={emoji ? "" : "Message"}
         onChange={handleInputChanges}
+        onKeyPress={handleKeypressEvent}
         name="msg"
         id="msg"
         cols="30"
