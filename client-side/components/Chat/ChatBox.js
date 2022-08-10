@@ -13,6 +13,7 @@ import useSound from "use-sound";
 import {
   getMessage,
   getSocketMessage,
+  getTypingMessage,
 } from "../../features/message/messageSlice";
 import auth from "../../firebase.init";
 import { io } from "socket.io-client";
@@ -24,6 +25,7 @@ const ChatBox = () => {
   const [currentUser, setCurrentUser] = useState([]);
   const [message, setMessage] = useState([]);
   const [socketMessage, setSocketMessage] = useState([]);
+  const [typingMessage, setTypingMessage] = useState([]);
   const [addMsgSuccess, setAddMsgSuccess] = useState(false);
   const [image, setImage] = useState("");
   const [isImageUpload, setIsImageUpload] = useState(false);
@@ -37,7 +39,17 @@ const ChatBox = () => {
     socket.current.on("getMessage", (data) => {
       setSocketMessage(data);
     });
+
+    // ------received typing message from socket
+    socket.current.on("getTypingMessage", (typingData) => {
+      setTypingMessage(typingData);
+    });
   }, []);
+
+  // dispatch typing message
+  useEffect(() => {
+    dispatch(getTypingMessage(typingMessage));
+  }, [typingMessage]);
 
   // send active user info
   useEffect(() => {
@@ -101,6 +113,14 @@ const ChatBox = () => {
   // -------add message-------
   const addMessage = async (e) => {
     e.preventDefault();
+    // emty typing message
+    socket.current.emit("typingMessage", {
+      senderName: currentUser && currentUser[0].username,
+      senderId: currentUser && currentUser[0]._id,
+      receiverId: friendInfo._id ? friendInfo._id : friendInfo.id,
+      message: "",
+    });
+
     let textMessage = e.target.msg.value;
     const data = {
       senderName: currentUser && currentUser[0].username,
@@ -157,12 +177,26 @@ const ChatBox = () => {
     dispatch(getMessage(message));
   }, [message]);
 
+  // handle input changes for typing message
+  const handleInputChanges = (e) => {
+    setIsImageUpload(false);
+    const inputValue = e.target.value;
+    const data = {
+      senderName: currentUser && currentUser[0].username,
+      senderId: currentUser && currentUser[0]._id,
+      receiverId: friendInfo._id ? friendInfo._id : friendInfo.id,
+      message: inputValue,
+    };
+    // send data to socket
+    socket.current.emit("typingMessage", data);
+  };
+
   return (
     <form onSubmit={addMessage} className="m-2 relative">
       <textarea
         className="w-full text-black border rounded-lg p-2 outline-secondary focus:outline focus:outline-accent"
         placeholder="Message"
-        onChange={() => setIsImageUpload(false)}
+        onChange={handleInputChanges}
         name="msg"
         id="msg"
         cols="30"

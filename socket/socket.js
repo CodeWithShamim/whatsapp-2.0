@@ -41,10 +41,18 @@ io.on("connection", (socket) => {
   // received message
   socket.on("sendMessage", (data) => {
     const user = findFriend(data?.receiverId);
-    console.log(user);
     // --------send messsage--------
     if (user !== undefined) {
       io.to(user?.socketId).emit("getMessage", data);
+    }
+  });
+
+  // --------received typing message--
+  socket.on("typingMessage", (typingData) => {
+    const user = findFriend(typingData?.receiverId);
+    // --------send messsage--------
+    if (user !== undefined) {
+      io.to(user?.socketId).emit("getTypingMessage", typingData);
     }
   });
 

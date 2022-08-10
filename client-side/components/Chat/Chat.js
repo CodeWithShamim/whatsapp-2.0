@@ -12,10 +12,11 @@ const Chat = () => {
   const { id, username, email, photo } = userInfo;
   const scrollRef = useRef();
   const messages = useSelector((state) => state.message.message);
+  const typingMessage = useSelector((state) => state.message.typingMessage);
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, [messages, typingMessage]);
 
   return (
     <div className="h-screen w-full flex flex-col lg:flex-row mt-4 lg:mt-0">
