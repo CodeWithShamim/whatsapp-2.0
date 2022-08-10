@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const Friend = ({ friend, select }) => {
   const { _id, username, photo } = friend;
 
@@ -7,7 +9,15 @@ const Friend = ({ friend, select }) => {
         select === _id && "bg-primary text-secondary"
       }`}
     >
-      <img className="w-12 h-12 rounded-full" src={photo} alt={username} />
+      <Image
+        src={photo}
+        alt={username}
+        height={60}
+        width={60}
+        // layout="fill"
+        // objectFit="contain"
+        className="rounded-full"
+      />
       <div className="flex flex-col gap-2 justify-center">
         <h2 className="font-semibold">{username}</h2>
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing</p>
