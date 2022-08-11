@@ -214,9 +214,9 @@ const ChatBox = () => {
     setIsImageUpload(false);
     const inputValue = e.target.value;
     const data = {
-      senderName: currentUser && currentUser[0].username,
-      senderId: currentUser && currentUser[0]._id,
-      receiverId: friendInfo._id ? friendInfo._id : friendInfo.id,
+      senderName: currentUser && currentUser[0]?.username,
+      senderId: currentUser && currentUser[0]?._id,
+      receiverId: friendInfo._id ? friendInfo?._id : friendInfo?.id,
       message: inputValue,
     };
     // send data to socket

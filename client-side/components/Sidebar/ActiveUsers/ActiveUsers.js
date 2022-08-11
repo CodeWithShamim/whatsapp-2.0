@@ -28,9 +28,12 @@ const ActiveFriends = () => {
   return (
     <div className="flex overflow-x-auto px-2 pt-2">
       {fliterActiveUsers?.map((activeUser) => (
-        <div className="m-2" onClick={() => handleActiveUser(activeUser)}>
+        <div
+          key={activeUser._id}
+          className="m-2"
+          onClick={() => handleActiveUser(activeUser)}
+        >
           <ActiveUser
-            key={activeUser._id}
             activeFriend={activeUser}
             isActive={isActive}
           ></ActiveUser>

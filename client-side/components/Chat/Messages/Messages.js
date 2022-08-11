@@ -17,7 +17,7 @@ const Messages = ({ scrollRef }) => {
     <div className="relative overflow-y-auto w-full flex flex-col justify-start h-full gap-3 m-5 pr-10">
       {messages && messages.length > 0 ? (
         <>
-          {messages.map((message) =>
+          {messages?.map((message) =>
             message.senderName === user?.displayName ? (
               <>
                 <UserMessage

@@ -46,7 +46,7 @@ const Chat = () => {
               objectFit="cover"
               alt={username}
             />
-
+            )
             <div className="pl-2 lg:pl-0">
               <h2>{username}</h2>
               <p className="flex items-center justify-start  ">
