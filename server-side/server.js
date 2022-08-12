@@ -2,11 +2,26 @@ const express = require("express");
 const app = express();
 var cors = require("cors");
 const port = process.env.PORT || 5000;
-const db = require("./config/database.js");
 const authRoute = require("./routes/authRoute");
 const messageRoute = require("./routes/messageRoute");
 const http = require("http");
 const socket = require("socket.io");
+
+// ----------connect databse---------------------------------
+const mongoose = require("mongoose");
+require("dotenv").config();
+mongoose
+  .connect(
+    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.z1tbp5w.mongodb.net/?retryWrites=true&w=majority`
+  )
+  .then(() => {
+    console.log("database connected..........");
+  })
+  .catch((error) => {
+    console.log(error);
+    console.log();
+  });
+// -------------------------------------------------------
 
 app.get("/", (req, res) => {
   res.send("Running");
