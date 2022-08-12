@@ -1,11 +1,7 @@
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import {
-  AiFillCalendar,
-  AiOutlineClose,
-  AiOutlineCloseCircle,
-} from "react-icons/ai";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 import {
   RiAttachment2,
   RiGalleryFill,
@@ -25,8 +21,6 @@ import { addActiveUser } from "../../features/user/activeUserSlice";
 import { toast } from "react-toastify";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
-// import msgSound from "../../public/sounds/send.mp3";
-// import notificationSound from "../../public/sounds/notification.mp3";
 
 const ChatBox = () => {
   const [user] = useAuthState(auth);
@@ -41,13 +35,13 @@ const ChatBox = () => {
   const [isShowEmoji, setIsShowEmoji] = useState(false);
   const [emoji, setEmoji] = useState(null);
   const dispatch = useDispatch();
-  const [sendMsgAudio] = useSound();
-  const [sendNotificationAudio] = useSound();
+  const [sendMsgAudio] = useSound("./sounds/send.mp3");
+  const [sendNotificationAudio] = useSound("./sounds/notification.mp3");
   const socket = useRef();
 
   // connect with socket
   useEffect(() => {
-    socket.current = io("ws://localhost:8000");
+    socket.current = io("http://localhost:5000/");
     socket.current.on("getMessage", (data) => {
       setSocketMessage(data);
     });
