@@ -2,7 +2,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useSelector } from "react-redux";
 import auth from "../../../firebase.init";
 import DefaultMessage from "./DefaultMessage";
-import FriendMessage from "./friendMessage";
+import FriendMessage from "./FriendMessage";
 import UserMessage from "./UserMessage";
 import PulseLoader from "react-spinners/PulseLoader";
 
