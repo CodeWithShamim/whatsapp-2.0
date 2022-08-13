@@ -16,7 +16,9 @@ const Friends = ({ searchValue }) => {
   useEffect(() => {
     const getFriends = async () => {
       try {
-        const { data } = await axios("http://localhost:5000/users");
+        const { data } = await axios(
+          "https://whatsapp-new-2-0.herokuapp.com/users"
+        );
         const getFriendLists = data.result.reverse();
 
         // -------filter current user from all user---------

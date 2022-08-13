@@ -34,7 +34,7 @@ const Home = () => {
 
       try {
         const { data } = await axios.put(
-          "http://localhost:5000/users",
+          "https://whatsapp-new-2-0.herokuapp.com/users",
           newUser
         );
         // console.log(data);
