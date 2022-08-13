@@ -30,7 +30,7 @@ const Friends = ({ searchValue }) => {
         // dispatch(addUserInfo(filterFriendLists[0]));
         setTimeout(() => {
           dispatch(addUserInfo(filterFriendLists[0]));
-        }, 100);
+        }, 1000);
       } catch (error) {
         console.log(error);
       }
