@@ -41,7 +41,11 @@ const ChatBox = () => {
 
   // connect with socket
   useEffect(() => {
-    socket.current = io("http://localhost:5000/");
+    socket.current = io("http://localhost:5000");
+    socket.current.on("connection", () => {
+      console.log("connection");
+    });
+
     socket.current.on("getMessage", (data) => {
       setSocketMessage(data);
     });

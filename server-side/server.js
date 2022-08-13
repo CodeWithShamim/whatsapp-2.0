@@ -4,8 +4,6 @@ var cors = require("cors");
 const port = process.env.PORT || 5000;
 const authRoute = require("./routes/authRoute");
 const messageRoute = require("./routes/messageRoute");
-const http = require("http");
-const socket = require("socket.io");
 
 // ----------connect databse---------------------------------
 const mongoose = require("mongoose");
@@ -19,7 +17,6 @@ mongoose
   })
   .catch((error) => {
     console.log(error);
-    console.log();
   });
 // -------------------------------------------------------
 
@@ -41,9 +38,15 @@ app.use("/message", messageRoute);
 //       mehtods: ["GET, POST"],
 //     },
 //   });
+const http = require("http");
+const httpServer = http.createServer(app);
 
-const server = http.createServer(app);
-const io = socket(server);
+const io = require("socket.io")(httpServer, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
+});
 
 // -------acitve user-----------
 let activeUsers = [];
@@ -105,6 +108,6 @@ io.on("connection", (socket) => {
 });
 // -----------------------------------------------------------------------------------
 
-server.listen(port, () => {
+httpServer.listen(port, () => {
   console.log("Listening to port........", port);
 });
