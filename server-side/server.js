@@ -4,10 +4,11 @@ var cors = require("cors");
 const port = process.env.PORT || 5000;
 const authRoute = require("./routes/authRoute");
 const messageRoute = require("./routes/messageRoute");
+require("dotenv").config();
+const path = require("path");
 
 // ----------connect databse---------------------------------
 const mongoose = require("mongoose");
-require("dotenv").config();
 mongoose
   .connect(
     `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.z1tbp5w.mongodb.net/?retryWrites=true&w=majority`
@@ -19,9 +20,10 @@ mongoose
     console.log(error);
   });
 // -------------------------------------------------------
-
+// app.use(express.static(path.join(__dirname, "../client-side/build")));
 app.get("/", (req, res) => {
-  res.send("Running");
+  // res.sendFile(path.join(__dirname, "../client-side/build/index.html"));
+  res.send("Running...");
 });
 
 app.use(express.urlencoded({ extended: true }));

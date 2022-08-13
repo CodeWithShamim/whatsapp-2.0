@@ -1,14 +1,13 @@
 ## Setup for server-side
-1. npm i bcrypt
-2. npm i body-parser
-3. npm i concurrently
-4. npm i cookie-parser
-5. npm i dotenv
-6. npm i express
-7. npm i formidable
-8. npm i jsonwebtoken
-9. npm i mongoose
-10. npm i nodemon
-11. npm i validator
+1. reduxjs/toolkit
+2. socket.io
+3. concurrently
+4. cors
+5. dotenv
+6. express
+7. jsonwebtoken
+8. mongoose
+9. nodemon
+10. validator
 
-npm i bcrypt body-parser concurrently cookie-parser dotenv express formidable jsonwebtoken mongoose nodemon validator
+npm i reduxjs/toolkit socket.io concurrently cors dotenv express jsonwebtoken mongoose nodemon validator
