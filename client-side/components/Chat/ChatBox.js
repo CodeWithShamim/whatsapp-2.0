@@ -83,7 +83,7 @@ const ChatBox = () => {
         setSocketMessage([]);
       }
 
-      // ----------show message notification---------
+      // -----------------------------show message notification---------------------------
       if (
         socketMessage.senderId !== friendInfoId &&
         socketMessage.receiverId === currentUser[0]?._id
@@ -142,6 +142,7 @@ const ChatBox = () => {
   // -------add message-------
   const addMessage = async (e) => {
     e.preventDefault();
+    sendMsgAudio();
     // emty typing message
     socket.current.emit("typingMessage", {
       senderName: currentUser && currentUser[0].username,
@@ -173,7 +174,6 @@ const ChatBox = () => {
       );
 
       if (res.data.message === "success") {
-        sendMsgAudio();
         setImage("");
         setAddMsgSuccess(!addMsgSuccess);
         setEmoji(null);
@@ -191,7 +191,7 @@ const ChatBox = () => {
           `https://whatsapp-new-2-0.herokuapp.com/message/getMessage?fdId=${fdId}&&myId=${myId}`
         );
         setMessage(res.data.result);
-        // console.log(res.data.result);
+        console.log(res.data.result);
       } catch (error) {
         console.log(error);
       }

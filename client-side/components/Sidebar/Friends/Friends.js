@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { addUserInfo } from "../../../features/user/userSlice";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
+import SocialLoading from "../../SocialLoading";
 
 const Friends = ({ searchValue }) => {
   const [friends, setFriends] = useState([]);
@@ -30,7 +31,7 @@ const Friends = ({ searchValue }) => {
         // dispatch(addUserInfo(filterFriendLists[0]));
         setTimeout(() => {
           dispatch(addUserInfo(filterFriendLists[0]));
-        }, 1000);
+        }, 500);
       } catch (error) {
         console.log(error);
       }
@@ -58,6 +59,8 @@ const Friends = ({ searchValue }) => {
 
   return (
     <div className="h-screen overflow-y-auto p-2">
+      {!friends.length > 0 && <SocialLoading />}
+
       {!searchResult?.length > 0 &&
         friends?.map((friend) => (
           <div onClick={() => handleFriend(friend)} key={friend._id}>
