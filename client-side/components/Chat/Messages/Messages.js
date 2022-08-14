@@ -14,7 +14,7 @@ const Messages = ({ scrollRef }) => {
   const friendInfoId = friendInfo?._id ? friendInfo._id : friendInfo.id;
 
   return (
-    <div className="relative overflow-y-auto w-full flex flex-col justify-start h-full gap-3 m-5 pr-10">
+    <div className="relative overflow-y-auto w-full flex flex-col justify-start h-screen gap-3 m-5 pr-10">
       {messages && messages.length > 0 ? (
         <>
           {messages?.map((message) =>

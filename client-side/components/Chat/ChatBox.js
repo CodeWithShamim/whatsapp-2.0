@@ -191,7 +191,7 @@ const ChatBox = () => {
           `https://whatsapp-new-2-0.herokuapp.com/message/getMessage?fdId=${fdId}&&myId=${myId}`
         );
         setMessage(res.data.result);
-        console.log(res.data.result);
+        // console.log(res.data.result);
       } catch (error) {
         console.log(error);
       }
@@ -259,7 +259,7 @@ const ChatBox = () => {
       <div className="absolute top-5 left-3 text-xl">{emoji && emoji}</div>
 
       {/* -------emoji section-------------- */}
-      <div className="absolute right-3 bottom-14 text-xl cursor-pointer">
+      <div className="absolute right-1 bottom-14 text-xl cursor-pointer">
         <div
           className="text-primary font-bold"
           onClick={() => setIsShowEmoji(!isShowEmoji)}
@@ -272,6 +272,7 @@ const ChatBox = () => {
             <Picker
               data={data}
               onEmojiSelect={(emoji) => handleEmojiPicker(emoji)}
+              perLine={8}
             />
           )}
         </div>

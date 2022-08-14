@@ -100,7 +100,10 @@ const Chat = () => {
       </div>
 
       {/* -------------ChatFriendInfo------------ */}
-      <div id="friendInfo" className={`lg:w-1/2 ${close && "lg:hidden"}`}>
+      <div
+        id="friendInfo"
+        className={`lg:w-1/2 hidden ${!close && "lg:block"}`}
+      >
         <ChatFriendInfo></ChatFriendInfo>
       </div>
     </div>
