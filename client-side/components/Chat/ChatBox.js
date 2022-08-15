@@ -11,6 +11,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import useSound from "use-sound";
 import {
+  getLastMessage,
   getMessage,
   getSocketMessage,
   getTypingMessage,
@@ -162,6 +163,7 @@ const ChatBox = () => {
       },
     };
     e.target.msg.value = "";
+    dispatch(getLastMessage(data));
 
     // send message to socket
     socket.current.emit("sendMessage", data);

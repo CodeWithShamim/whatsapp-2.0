@@ -11,6 +11,9 @@ export const messageSlice = createSlice({
         getMessage: (state, action) => {
             state.message = action.payload;
         },
+        getLastMessage: (state, action) => {
+            state.message = [...state.message, action.payload];
+        },
         getSocketMessage: (state, action) => {
             state.message = [...state.message, action.payload];
         },
@@ -19,5 +22,5 @@ export const messageSlice = createSlice({
         },
     },
 });
-export const { getMessage, getSocketMessage, getTypingMessage } = messageSlice.actions;
+export const { getMessage, getLastMessage, getSocketMessage, getTypingMessage } = messageSlice.actions;
 export default messageSlice.reducer;

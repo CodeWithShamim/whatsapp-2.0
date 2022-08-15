@@ -3,7 +3,7 @@ import ChatBox from "./ChatBox";
 import ChatFriendInfo from "./ChatFriendInfo/ChatFriendInfo";
 import Messages from "./Messages/Messages";
 import { useEffect, useRef, useState } from "react";
-import { BiChevronRight } from "react-icons/bi";
+import { FiChevronsRight } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import Image from "next/image";
 import { RiWifiOffLine } from "react-icons/ri";
@@ -94,7 +94,7 @@ const Chat = () => {
 
         {close && (
           <div className="text-2xl hidden lg:block">
-            <BiChevronRight />
+            <FiChevronsRight />
           </div>
         )}
       </div>
@@ -102,6 +102,7 @@ const Chat = () => {
       {/* -------------ChatFriendInfo------------ */}
       <div
         id="friendInfo"
+        // className={`lg:w-1/2 ${close && "lg:hidden"}`}
         className={`lg:w-1/2 hidden ${!close && "lg:block"}`}
       >
         <ChatFriendInfo></ChatFriendInfo>
