@@ -11,14 +11,18 @@ const HeaderInfo = ({ userInfo }) => {
   return (
     <div className="text-center grid gap-2 justify-center items-center m-3">
       <div className="w-16 h-16 mx-auto mt-6">
-        <Image
-          src={photo}
-          alt={username}
-          height={80}
-          width={80}
-          objectFit="cover"
-          className="rounded-full "
-        />
+        {userInfo && (
+          <Image
+            src={photo || "/images/defalut.jpg"}
+            alt={username}
+            height={80}
+            width={80}
+            placeholder="blur"
+            blurDataURL={photo || "/images/defalut.jpg"}
+            objectFit="cover"
+            className="rounded-full "
+          />
+        )}
       </div>
       <h2 className="font-semibold">{username}</h2>
       <h2>{defaultValue.position}</h2>

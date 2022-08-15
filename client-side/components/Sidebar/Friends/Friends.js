@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Friend from "./Friend";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUserInfo } from "../../../features/user/userSlice";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";

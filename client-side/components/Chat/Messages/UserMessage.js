@@ -24,10 +24,12 @@ const UserMessage = ({ message: userMsg, scrollRef }) => {
         <>
           <div ref={scrollRef} className="h-36 w-32">
             <Image
-              src={message?.image}
+              src={message.image || "/images/defalut.jpg"}
               height={180}
               width={150}
               objectFit="cover"
+              placeholder="blur"
+              blurDataURL={message.image || "/images/defalut.jpg"}
               alt="messageImg"
               className="rounded-sm"
             />

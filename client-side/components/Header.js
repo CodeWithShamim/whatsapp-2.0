@@ -49,13 +49,17 @@ const Header = () => {
 
           <div className="avatar online">
             <div className="w-10 rounded-md">
-              <Image
-                src={user?.photoURL}
-                height={50}
-                width={50}
-                objectFit="cover"
-                alt={user?.displayName}
-              />
+              {user && (
+                <Image
+                  src={user.photoURL || "/images/defalut.jpg"}
+                  height={50}
+                  width={50}
+                  placeholder="blur"
+                  blurDataURL={user.photoURL || "/images/defalut.jpg"}
+                  objectFit="cover"
+                  alt={user?.displayName}
+                />
+              )}
             </div>
           </div>
           {/* ---log out--- */}

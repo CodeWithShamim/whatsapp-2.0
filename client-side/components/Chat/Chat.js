@@ -38,14 +38,18 @@ const Chat = () => {
         {/* ---Header start--- */}
         <div className="p-2 m-2 rounded-3xl shadow-xl flex justify-between items-center">
           <div className="flex justify-between items-center lg:gap-3">
-            <Image
-              className="rounded-full"
-              src={photo}
-              height={50}
-              width={50}
-              objectFit="cover"
-              alt={username}
-            />
+            {userInfo && (
+              <Image
+                className="rounded-full"
+                src={photo || "/images/default.jpg"}
+                height={50}
+                width={50}
+                placeholder="blur"
+                blurDataURL={photo || "/images/default.jpg"}
+                objectFit="cover"
+                alt={username}
+              />
+            )}
             )
             <div className="pl-2 lg:pl-0">
               <h2>{username}</h2>

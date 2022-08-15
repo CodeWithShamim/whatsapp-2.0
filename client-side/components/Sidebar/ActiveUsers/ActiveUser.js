@@ -10,14 +10,18 @@ const ActiveFriend = ({ activeFriend, isActive }) => {
           isActive === _id && "border-accent"
         }`}
       >
-        <Image
-          src={photo}
-          alt={username}
-          height={70}
-          width={70}
-          objectFit="cover"
-          className="rounded-full"
-        />
+        {activeFriend && (
+          <Image
+            src={photo || "/images/default.jpg"}
+            alt={username}
+            height={70}
+            width={70}
+            placeholder="blur"
+            blurDataURL={photo || "/images/default.jpg"}
+            objectFit="cover"
+            className="rounded-full"
+          />
+        )}
         <span className="absolute bottom-0 right-1 border border-secondary badge badge-xs badge-accent"></span>
       </div>
       {/* <p className="text-sm">{username}</p> */}

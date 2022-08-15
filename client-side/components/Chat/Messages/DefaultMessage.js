@@ -6,14 +6,18 @@ const DefaultMessage = () => {
   return (
     <div className="h-full text-center">
       <div className="w-24 h-24 mx-auto mt-5">
-        <Image
-          src={fdDefaultMsg.photo}
-          height={80}
-          width={80}
-          objectFit="cover"
-          alt="friendImg"
-          className="rounded-full"
-        />
+        {fdDefaultMsg && (
+          <Image
+            src={fdDefaultMsg.photo || "/images/defalut.jpg"}
+            height={80}
+            width={80}
+            placeholder="blur"
+            blurDataURL={fdDefaultMsg.photo || "/images/defalut.jpg"}
+            objectFit="cover"
+            alt="friendImg"
+            className="rounded-full"
+          />
+        )}
       </div>
       <h2 className="font-semibold">
         Hello, <span className="text-purple-500">{fdDefaultMsg.username}</span>

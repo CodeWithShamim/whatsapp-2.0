@@ -36,9 +36,11 @@ const Attachments = () => {
         {sliceAttachments?.map((attachment) => (
           <div key={attachment._id} className="w-20 h-24 rounded">
             <Image
-              src={attachment.message.image}
+              src={attachment?.message?.image || "/images/default.jpg"}
               height={160}
               width={120}
+              placeholder="blur"
+              blurDataURL={attachment?.message?.image || "/images/default.jpg"}
               objectFit="cover"
               alt="attachments-img"
             />
