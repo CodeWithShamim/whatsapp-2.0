@@ -13,6 +13,7 @@ import useSound from "use-sound";
 import {
   getLastMessage,
   getMessage,
+  getNotificationMessage,
   getSocketMessage,
   getTypingMessage,
 } from "../../features/message/messageSlice";
@@ -91,8 +92,9 @@ const ChatBox = () => {
         socketMessage.receiverId === currentUser[0]?._id
       ) {
         sendNotificationAudio();
+        dispatch(getNotificationMessage(socketMessage));
         toast.success(`💬 ${socketMessage?.senderName} send a new message`, {
-          position: "bottom-left",
+          position: "top-right",
           autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,

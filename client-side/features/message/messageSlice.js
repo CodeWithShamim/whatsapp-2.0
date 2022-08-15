@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     message: [],
-    typingMessage: []
+    typingMessage: [],
+    notificationMessage: []
 };
 export const messageSlice = createSlice({
     name: "message",
@@ -20,7 +21,10 @@ export const messageSlice = createSlice({
         getTypingMessage: (state, action) => {
             state.typingMessage = action.payload;
         },
+        getNotificationMessage: (state, action) => {
+            state.notificationMessage = action.payload;
+        }
     },
 });
-export const { getMessage, getLastMessage, getSocketMessage, getTypingMessage } = messageSlice.actions;
+export const { getMessage, getLastMessage, getSocketMessage, getTypingMessage, getNotificationMessage } = messageSlice.actions;
 export default messageSlice.reducer;

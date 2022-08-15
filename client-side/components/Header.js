@@ -5,10 +5,24 @@ import { BiLogInCircle } from "react-icons/bi";
 import { ThemeContext } from "../pages";
 import { useContext } from "react";
 import Image from "next/image";
+import { MdNotificationsNone } from "react-icons/md";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const Header = () => {
   const [user] = useAuthState(auth);
   const [theme, setTheme] = useContext(ThemeContext);
+  const [notificationMessage, setNotificationMessage] = useState({});
+  const getNotificationMessage = useSelector(
+    (state) => state.message.notificationMessage
+  );
+
+  useEffect(() => {
+    setNotificationMessage(getNotificationMessage);
+  }, [getNotificationMessage]);
+
+  console.log(notificationMessage);
 
   return (
     <>
@@ -22,6 +36,39 @@ const Header = () => {
         </h2>
 
         <div className="flex items-center">
+          {/* ---------notification-------- */}
+          <div className="relative text-2xl px-3 cursor-pointer">
+            {notificationMessage.message && (
+              <span className="absolute right-3 bottom-5 bg-primary rounded-full w-2 h-2 text-sm font-extrabold"></span>
+            )}
+
+            {/* ----------dropdown for notification msg---------- */}
+            <div className="dropdown dropdown-end">
+              <label className="cursor-pointer" tabIndex="1">
+                <MdNotificationsNone />
+              </label>
+              <ul
+                tabIndex="1"
+                className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                {/* ----------content-------- */}
+                {notificationMessage.message ? (
+                  <p className="text-xs font-bold text-gray-400">
+                    {notificationMessage?.senderName} send you{" "}
+                    <span className="text-purple-400">
+                      "{notificationMessage.message?.text?.slice(0, 1000)}"
+                    </span>
+                  </p>
+                ) : (
+                  <p className="text-xs font-bold text-gray-400">
+                    Nofification message not find
+                  </p>
+                )}
+                {/* ---------------content end--------- */}
+              </ul>
+            </div>
+          </div>
+
           {/* --------theme btn----------- */}
           <div className="mr-3 flex items-center">
             <label className="swap swap-rotate">
