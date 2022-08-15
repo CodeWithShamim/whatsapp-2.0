@@ -14,7 +14,7 @@ const ChatFriendInfo = () => {
       {/* _______contact info________ */}
       <ContactInfo userInfo={userInfo}></ContactInfo>
       {/* _______attachments info________ */}
-      <Attachments userInfo={userInfo}></Attachments>
+      <Attachments></Attachments>
     </div>
   );
 };

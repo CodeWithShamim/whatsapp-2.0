@@ -9,7 +9,7 @@ body,
     box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     scroll-behavior: smooth;
-    transition: 0.4s linear;
+    transition: 0.3s linear;
     scrollbar-width: none;
 }
 

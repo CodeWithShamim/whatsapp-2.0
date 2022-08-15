@@ -86,7 +86,7 @@ const Chat = () => {
         {!close && (
           <div
             onClick={() => setClose(!close)}
-            className="absolute hidden lg:block right-6 top-14 z-50 cursor-pointer p-3"
+            className="absolute hidden lg:block right-6 top-14 z-50 cursor-pointer p-3 text-lg"
           >
             <AiOutlineClose />
           </div>
