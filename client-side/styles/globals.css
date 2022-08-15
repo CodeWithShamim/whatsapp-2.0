@@ -2,18 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 html,
-body {
+body,
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     scroll-behavior: smooth;
     transition: 0.4s linear;
+    scrollbar-width: none;
 }
 
 ::-webkit-scrollbar {
-    width: 0px;
-    overflow: hidden;
+    display: none;
 }
 
 a {
