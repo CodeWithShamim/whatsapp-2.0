@@ -22,6 +22,7 @@ import { addActiveUser } from "../../features/user/activeUserSlice";
 import { toast } from "react-toastify";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
+import BeatLoader from "react-spinners/BeatLoader";
 
 const ChatBox = () => {
   const [user] = useAuthState(auth);
@@ -91,7 +92,7 @@ const ChatBox = () => {
       ) {
         sendNotificationAudio();
         toast.success(`💬 ${socketMessage?.senderName} send a new message`, {
-          position: "top-right",
+          position: "bottom-left",
           autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -140,6 +141,7 @@ const ChatBox = () => {
       alert("Please! select an image");
     }
   };
+
   // -------add message-------
   const addMessage = async (e) => {
     e.preventDefault();
@@ -184,6 +186,10 @@ const ChatBox = () => {
       console.log(error);
     }
   };
+  useEffect(() => {
+    setImage("");
+    setIsImageUpload(false);
+  }, [friendInfo]);
 
   // --------get message---------
   useEffect(() => {
@@ -308,6 +314,11 @@ const ChatBox = () => {
             id="image"
           />
         </span>
+        {isImageUpload && (
+          <span className="flex items-center">
+            please wait {<BeatLoader size={5} color="#ff898b" />}
+          </span>
+        )}
 
         {/* -----gif image---------- */}
         <span className="text-xl cursor-pointer">

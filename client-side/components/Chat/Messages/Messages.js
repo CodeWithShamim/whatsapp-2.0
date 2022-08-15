@@ -22,6 +22,11 @@ const Messages = ({ scrollRef }) => {
     setTimeout(() => {
       setInitialLoading(false);
     }, 1500);
+
+    // scroll after loading
+    setTimeout(() => {
+      scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, 1600);
   }, [friendInfo]);
 
   return (

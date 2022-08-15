@@ -54,7 +54,7 @@ const Home = () => {
 
       <div className="h-screen flex flex-col lg:flex-row lg:px-6 font-serif text-xs">
         {/* -------------sidebar--------------- */}
-        <div className="lg:w-1/4 shadow-inner rounded-xl pb-6">
+        <div className="lg:w-1/4 shadow-inner rounded-xl">
           <Sidebar />
         </div>
 
