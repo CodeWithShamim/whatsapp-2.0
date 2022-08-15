@@ -6,6 +6,7 @@ import { ThemeContext } from "../pages";
 import { useContext } from "react";
 import Image from "next/image";
 import { MdNotificationsNone } from "react-icons/md";
+import { AiFillNotification } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -21,8 +22,6 @@ const Header = () => {
   useEffect(() => {
     setNotificationMessage(getNotificationMessage);
   }, [getNotificationMessage]);
-
-  console.log(notificationMessage);
 
   return (
     <>
@@ -54,14 +53,27 @@ const Header = () => {
                 {/* ----------content-------- */}
                 {notificationMessage.message ? (
                   <p className="text-xs font-bold text-gray-400">
-                    {notificationMessage?.senderName} send you{" "}
+                    <div className="flex items-center">
+                      <span className="text-xl text-primary pr-1">
+                        <AiFillNotification />
+                      </span>
+                      {notificationMessage?.senderName} send you{" "}
+                    </div>
                     <span className="text-purple-400">
-                      "{notificationMessage.message?.text?.slice(0, 1000)}"
+                      "
+                      {notificationMessage.message?.text?.slice(0, 1000) ||
+                        (notificationMessage.message?.image && "Image")}
+                      "
                     </span>
                   </p>
                 ) : (
                   <p className="text-xs font-bold text-gray-400">
-                    Nofification message not find
+                    <div className="flex items-center">
+                      <span className="text-xl text-primary pr-1">
+                        <AiFillNotification />
+                      </span>
+                      Nofification message not find
+                    </div>
                   </p>
                 )}
                 {/* ---------------content end--------- */}
