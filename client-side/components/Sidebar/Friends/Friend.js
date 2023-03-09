@@ -27,7 +27,7 @@ const Friend = ({ friend, select }) => {
   useEffect(() => {
     const findCurrentUser = async () => {
       const { data } = await axios.get(
-        `https://whatsapp-new-2-0.herokuapp.com/users/${user?.email}`
+        `https://whatsapp-new-backend.vercel.app/users/${user?.email}`
       );
       setCurrentUser(data.result);
     };

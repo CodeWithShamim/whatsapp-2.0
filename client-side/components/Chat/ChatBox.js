@@ -44,7 +44,7 @@ const ChatBox = () => {
 
   // connect with socket
   useEffect(() => {
-    socket.current = io("https://whatsapp-new-2-0.herokuapp.com");
+    socket.current = io("https://whatsapp-new-backend.vercel.app");
     socket.current.on("connection", () => {
       console.log("connection");
     });
@@ -110,7 +110,7 @@ const ChatBox = () => {
   useEffect(() => {
     const findCurrentUser = async () => {
       const { data } = await axios.get(
-        `https://whatsapp-new-2-0.herokuapp.com/users/${user?.email}`
+        `https://whatsapp-new-backend.vercel.app/users/${user?.email}`
       );
       setCurrentUser(data.result);
     };
@@ -175,7 +175,7 @@ const ChatBox = () => {
     // ---post message data---
     try {
       const res = await axios.post(
-        "https://whatsapp-new-2-0.herokuapp.com/message/addMessage",
+        "https://whatsapp-new-backend.vercel.app/message/addMessage",
         data
       );
 
@@ -198,7 +198,7 @@ const ChatBox = () => {
     const getMessage = async (fdId, myId) => {
       try {
         const res = await axios(
-          `https://whatsapp-new-2-0.herokuapp.com/message/getMessage?fdId=${fdId}&&myId=${myId}`
+          `https://whatsapp-new-backend.vercel.app/message/getMessage?fdId=${fdId}&&myId=${myId}`
         );
         setMessage(res.data.result);
         // console.log(res.data.result);

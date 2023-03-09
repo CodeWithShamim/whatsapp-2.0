@@ -18,7 +18,7 @@ const Friends = ({ searchValue }) => {
     const getFriends = async () => {
       try {
         const { data } = await axios(
-          "https://whatsapp-new-2-0.herokuapp.com/users"
+          "https://whatsapp-new-backend.vercel.app/users"
         );
         const getFriendLists = data.result.reverse();
 
